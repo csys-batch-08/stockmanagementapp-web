@@ -14,14 +14,15 @@ import javax.servlet.http.HttpSession;
 import com.stock.dao.CartDao;
 import com.stock.model.Cart;
 import com.stock.model.Purchase;
+import com.stock.model.Stock;
 import com.stock.util.ConnectionUtil;
 
 public class CartImpl implements CartDao {
 
 	public void insert(Cart cart) {
 
-//		String insertQuery = "insert into cart (user_id,product_id,quantity,totalPrice) values (?,?,?,?)";
-		String insertQuery="	insert into cart (user_id,product_id,quantity,totalprice,delivery_date) values(?,?,?,"+cart.getQunatity()+"*?,sysdate+?)";
+
+		String insertQuery="	insert into cart (user_id,product_id,quantity,totalprice,delivery_date) values(?,?,?,?,?)";
 		Connection con = null;
 		try {
 			con = ConnectionUtil.gbConnection();
@@ -30,9 +31,11 @@ public class CartImpl implements CartDao {
 			pstmt.setInt(1, cart.getUserId());
 			pstmt.setInt(2, cart.getProductId());
 			pstmt.setInt(3, cart.getQunatity());
-			pstmt.setDouble(4, cart.getTotalPrice());
-			pstmt.setInt(5, cart.getExpectedDate());
-//			pstmt.setDate(5, new java.sql.Date(cart.getExpectedDate().getTime()));
+			pstmt.setDouble(4,( cart.getQunatity()* cart.getTotalPrice()));
+			pstmt.setDate(5,new java.sql.Date(cart.getExpectedDate().getTime()));
+
+			
+
 			int i = pstmt.executeUpdate();
 			pstmt.executeUpdate("commit");
 			System.out.println(i + "inserted");
@@ -48,12 +51,11 @@ public class CartImpl implements CartDao {
 
 	}
 	
-public ResultSet allcart(int userid){
-	//List<Cart>cartDetails=new ArrayList<Cart>();
-	//String insertquery="select*from cart where user_id=?";
-	String insertquery="select * from cart where cart_id=(select max(cart_id) from cart) and user_id = ?";
+public List<Cart> allcart(int userid){
 	
-	ResultSet rs=null;
+	String insertquery="select * from cart where cart_id=(select max(cart_id) from cart) and user_id = ?";
+	List<Cart> usercart=new ArrayList<Cart>();
+	
 	try {
 		Connection con = null;
 		try {
@@ -64,22 +66,18 @@ public ResultSet allcart(int userid){
 		}
 		PreparedStatement pstmt = con.prepareStatement(insertquery);
 		pstmt.setInt(1, userid);
-		rs=pstmt.executeQuery();
-//		while(rs.next()){
-//			
-//			Cart cart1=new Cart(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6));
-//			System.out.println(cart1);
-//			cartDetails.add(cart1);
-//			System.out.println(cart1);
-//			
-//		}} catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-//		e.printStackTrace();
-	} catch (SQLException e) {
+		ResultSet rs = pstmt.executeQuery();
+	while(rs.next()){
+			
+			Cart cart1=new Cart(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDouble(5), rs.getDate(6));
+			
+			usercart.add(cart1);
+			
+		}} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	return rs;
+	return usercart;
 			
 			
 			
@@ -108,13 +106,40 @@ public ResultSet allcart(int userid){
 		}
 				}
 		
-			
-			
-	public ResultSet viewCart(){
 		
-		String viewquery="select * from cart ";
+			
+	public List<Cart> viewCart(){
+		List<Cart> adminCartView = new ArrayList<Cart>();
+		String viewquery="select cart_id,user_id,product_id,quantity,totalPrice,delivery_date from cart";
 		
-		ResultSet rs=null;
+			Connection con = null;
+			try {
+				try {
+					con = ConnectionUtil.gbConnection();
+					Statement stmt = con.createStatement();
+					ResultSet	rs = stmt.executeQuery(viewquery);
+					while(rs.next()){
+						
+						Cart cart=new Cart(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDouble(5), rs.getDate(6));
+						 adminCartView.add(cart);
+					}
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return adminCartView;
+	
+			
+	}	
+	public List<Cart> viewcartuser(int userid){
+		
+		String insertquery="select cart_id,user_id,product_id,quantity,totalPrice,delivery_date from cart where user_id = ?";
+		List<Cart> usercartview=new ArrayList<Cart>();
+		
 		try {
 			Connection con = null;
 			try {
@@ -123,18 +148,25 @@ public ResultSet allcart(int userid){
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			Statement stmt = con.createStatement();
-			rs = stmt.executeQuery(viewquery);
-
-		} catch (SQLException e) {
+			PreparedStatement pstmt = con.prepareStatement(insertquery);
+			pstmt.setInt(1, userid);
+			ResultSet rs = pstmt.executeQuery();
+		while(rs.next()){
+				
+				Cart cart1=new Cart(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDouble(5), rs.getDate(6));
+				
+				usercartview.add(cart1);
+				
+			}} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return rs;
-	
-			
-			
-}		}
+		return usercartview;
+				
+				
+				
+	}		
+
+		}
 
 

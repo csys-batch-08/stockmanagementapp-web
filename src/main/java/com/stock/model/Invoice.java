@@ -1,11 +1,13 @@
 package com.stock.model;
 
+import java.util.Date;
+
 public class Invoice {
 
 	private int billId;
 	private int orderId;
 	private String status;
-	private int deliveryDate;
+	private Date deliveryDate;
 	private int userId;
 	
 	
@@ -34,15 +36,23 @@ public class Invoice {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public int getDeliveryDate() {
+	public Date getDeliveryDate() {
 		return deliveryDate;
 	}
-	public void setDeliveryDate(int deliveryDate) {
+	public void setDeliveryDate(Date deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
-	public Invoice(int orderId, int deliveryDate, int userId) {
+	public Invoice(int orderId, Date deliveryDate, int userId) {
 		super();
 		this.orderId = orderId;
+		this.deliveryDate = deliveryDate;
+		this.userId = userId;
+	}
+	public Invoice(int billId, int orderId, String status, Date deliveryDate, int userId) {
+		super();
+		this.billId = billId;
+		this.orderId = orderId;
+		this.status = status;
 		this.deliveryDate = deliveryDate;
 		this.userId = userId;
 	}

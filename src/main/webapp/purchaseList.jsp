@@ -1,5 +1,7 @@
+   
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
  <%@ page import="java.sql.ResultSet"
  import ="com.stock.impl.*" %>   
 <!DOCTYPE html>
@@ -9,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock item</title>
-<style>
+  <style>
 body {
       margin: 0;
       font-family: Arial;
@@ -100,7 +102,7 @@ body {
     background-color:red;
     }
     table{
-    margin-top:20px;
+    margin-top:100px;
     margin-left:100px;}
 </style>
 </head>
@@ -111,7 +113,7 @@ body {
         <center><h1 >STOCK INVENTORY MANAGEMENT</h1></center>
     </div>
    
- <div class="topnav" id="myTopnav">
+     <div class="topnav" id="myTopnav">
    <a href="stockItemsadmin.jsp" >Stock</a>
    
     <a href="invoice.jsp" >Invoice</a>
@@ -131,18 +133,11 @@ body {
     <a href="purchaseList.jsp">PurchaseList</a>
   
     </div>
-  
-    </div>
-  
-      <%
-      PuruchaseImpl pimpl=new  PuruchaseImpl();
-      ResultSet rs=  pimpl.showPurchase();
-          //(ResultSet)session.getAttribute("showProduct");
-      %>
-    <br>
-    <table border=1 style="width:80%;margin-left:100px; border-collapse: collapse;">
+
+   
+      <table border=1; style="width:90%;margin-left:100px; border-collapse:collapse ">
           <tr>
-.            
+            
             <th scope="col">OrderId</th>
             <th scope="col">ProductId</th>
             <th scope="col">UserId</th>
@@ -151,35 +146,32 @@ body {
             <th scope="col">TotalPrice</th>
             <th scope="col">Status</th>
             <th scope="col">Date</th>
+             
             
           </tr>
        
        
+        
+          <c:forEach items="${purchase}" var="purchaselist"> 
        
-         <% while(rs.next())
-        { 
        
-        %>
           <tr>
             
-            <td><%=rs.getInt(1)%></td>
-            <a><td><%=rs.getInt(2)%></td>
-            <td><%=rs.getInt(3)%></td>
-             <td><%=rs.getString(4) %></td>
-              <td><%=rs.getInt(5)%></td>
-            <td><%=rs.getDouble(6)%></td>
-             <td><%=rs.getString(7)%></td>
-            
-            <td><%=rs.getDate(8)%></td>
-            
-         	<% session.setAttribute("orderid",rs.getInt(1) );
-         	
-         	%>
+            <td>${purchaselist.cartId}</td>
+            <td>${purchaselist.productId}</td>
+            <td>${purchaselist.userId}</td>
+             <td>${purchaselist.productName}</td>
+            <td>${purchaselist.orderQty}</td>
+            <td>${purchaselist.totalPrice}</td>
+     	    <td>${purchaselist.status}</td>
+     	    <td>${purchaselist.orderDate}</td>
            		
       
           </tr>
-           <%} %>
-     
-      </table>
+      </c:forEach>        
+              
+              
+        
 </body>
+
 </html>

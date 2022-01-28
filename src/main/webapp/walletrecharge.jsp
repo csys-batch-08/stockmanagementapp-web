@@ -1,6 +1,7 @@
 <%@page import="com.stock.impl.UserImpl"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="com.stock.impl.UserImpl.*"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -98,17 +99,9 @@ table, th, td {
       </head>
 <body>
 
-	<%
-	Double wallet = Double.parseDouble(session.getAttribute("walletamount").toString());
-	int userid = (int) session.getAttribute("user id");
-	UserImpl ui = new UserImpl();
-	ResultSet rs = ui.walletamount(userid);
-	rs.next();
-	double wall = rs.getDouble(8);
-	%>
-	<center>
+		<center>
 	<form action="wallet" method="get">
-	Current wallet amount:<span><%=wall%></span><br><br>
+	Current wallet amount:${walletamount}<br><br> 
 	Enter recharge amount:<br>
 	<input type="number" name="amount" id="number" list ="amount" autofocus required placeholder="enter amount" min="0"><br><br>
 	Enter your password:<br>

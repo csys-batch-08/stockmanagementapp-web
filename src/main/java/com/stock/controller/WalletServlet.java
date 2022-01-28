@@ -1,13 +1,17 @@
 package com.stock.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.stock.impl.UserImpl;
+import com.stock.model.Cart;
 import com.stock.model.User;
 
 /**
@@ -32,15 +36,26 @@ public class WalletServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		System.out.println("pothi");
+		
+	HttpSession session=request.getSession();
+	int userid=Integer.parseInt(session.getAttribute("userid").toString());
+	    UserImpl userwallet=new UserImpl();
+		
 		Double amount=Double.parseDouble(request.getParameter("amount"));
 		System.out.println(amount);
 		String password=request.getParameter("password");
 		System.out.println(password);
 		User wallet= new User(amount,password);
-		UserImpl userwallet=new UserImpl();
-		userwallet.wallet(wallet);
 		
+		userwallet.wallet(wallet);
+		User walletamount=userwallet.walletAmount(userid);
+		Double amount1=walletamount.getWallet();
+		
+		session.setAttribute("walletamount", amount1);
 		response.sendRedirect("walletrecharge.jsp");
+	
+		
+		
 		
 	}
 

@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
      <%@ page import="java.sql.ResultSet"
  import ="com.stock.impl.*" import = "javax.servlet.http.HttpSession" %>   
  
-    <%
+  <%--   <%
     String pName=request.getParameter("pname");
     StockImpl stock=new StockImpl();
     
  ResultSet rs=stock.validateProduct(pName);   
- %>
+ %> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,24 +85,37 @@ margin-left:500px;
         <br><br>
       </ul>  
 <form action="cart" method="post">
-	<%if(rs.next()) { %>
+<table style="width: 80%; margin-left: 100px;">
+		<tr>
+
+			<th scope="col">ProductId</th>
+			<th scope="col">ProductName</th>
+			<th scope="col">ProductQuantity</th>
+			<th scope="col">Price</th>
+			
+		</tr>
+
+
+	<c:forEach items ="${productdetails}" var="products">
             
-            <label>Product Id :</label> <b><%=rs.getInt(1)%></b> <br>
-            <label>Product Name :</label><%=rs.getString(2)%><br>
-			<lable>Product Quantity :</lable><%=rs.getInt(3)%><br>
-			<lable>Product Price :</lable><%=rs.getDouble(4)%><br>
-			
-			
-			<% session.setAttribute("product id",rs.getInt(1) );
-			session.setAttribute("price",rs.getDouble(4));
-			session.setAttribute("productName", rs.getString(2));
-			
-			session.setAttribute("currentqty", rs.getInt(3));
-			%>
-      <%} %>  
+          
+         
+        <tbody>
+          <tr>
+            
+            <td>${products.productId} </td>
+            <td>${products.productName}</td>
+            <td>${products.quantity}</td>
+            <td>${products.unitPrice}</td>
+     
+		 <c:set var="productid" value="${products.productId}" scope="session" />
+         <c:set var="productname" value="${products.productName}" scope="session" />
+         <c:set var="proqty" value="${products.quantity}" scope="session" />
+         <c:set var="unitprice" value="${products.unitPrice}" scope="session" />
+         
       
       
-      
+      </c:forEach>
       
        <br><br><br>
       <div class="one">
@@ -109,7 +123,7 @@ margin-left:500px;
        <lable>How much do you want to buy :</lable><br>
        <input type="number" name="quantity" id="quantity" list ="quantity" autofocus required placeholder="enter quantity" min="1" ><br>
         <lable>Expected no of days :</lable><br>
-       <input type="number" name="date" id="date"  list ="date" autofocus required placeholder="expected no of days" min="1" ><br><br>
+       <input type="Date" name="date" id="datefield"  list ="date" autofocus required placeholder="expected no of days"  ><br><br>
              <button type="submit" >submit</button>
       </div>
       
@@ -134,4 +148,21 @@ session.removeAttribute("qtyerror") ;
       
        </form>
 </body>
+<script type="text/javascript">
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; 
+var yyyy = today.getFullYear();
+if(dd<10){
+  dd='0'+dd
+} 
+if(mm<10){
+  mm='0'+mm
+} 
+
+today = yyyy+'-'+mm+'-'+dd;
+document.getElementById("datefield").setAttribute("min", today);
+</script>
+
+
 </html>

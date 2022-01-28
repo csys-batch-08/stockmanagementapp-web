@@ -1,6 +1,7 @@
    
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
  <%@ page import="java.sql.ResultSet"
  import ="com.stock.impl.*" %>   
 <!DOCTYPE html>
@@ -134,14 +135,14 @@ body {
     </div>
 
    
-   
+   <%-- 
       <%
       PuruchaseImpl pimpl=new  PuruchaseImpl();
       ResultSet rs=  pimpl.showPurchase();
           //(ResultSet)session.getAttribute("showProduct");
       %>
     <br>
-     <table border=1; style="width:90%;margin-left:100px; border-collapse:collapse ">
+    --%>  <table border=1; style="width:90%;margin-left:100px; border-collapse:collapse ">
           <tr>
             
             <th scope="col">OrderId</th>
@@ -157,40 +158,51 @@ body {
           </tr>
        
        
+        
+          <c:forEach items="${purchase}" var="purchaselist"> 
        
-         <% while(rs.next())
-        { 
        
-        %>
           <tr>
             
-            <td><%=rs.getInt(1)%></td>
-            <a><td><%=rs.getInt(2)%></td>
-            <td><%=rs.getInt(3)%></td>
-             <td><%=rs.getString(4) %></td>
-              <td><%=rs.getInt(5)%></td>
-            <td><%=rs.getDouble(6)%></td>
-             <td><%=rs.getString(7)%></td>
-            
-            <td><%=rs.getDate(8)%></td>
-              <td>
-              
-              
-              
-              <form action="invoice">
-        Enter delivery no of days<input type="number" name="deliveryDate"   list ="deliverydate" autofocus required placeholder=" delivery no of days" min="1">
-              <button type="submit">Submit
-              </button>
-              </form></td>
-            
-         	<% session.setAttribute("orderid",rs.getInt(1) );
-         	session.setAttribute("users_id",rs.getInt(3) );
-         	%>
+            <td>${purchaselist.cartId}</td>
+            <td>${purchaselist.productId}</td>
+            <td>${purchaselist.userId}</td>
+             <td>${purchaselist.productName}</td>
+            <td>${purchaselist.orderQty}</td>
+            <td>${purchaselist.totalPrice}</td>
+     	    <td>${purchaselist.status}</td>
+     	    <td>${purchaselist.orderDate}</td>
            		
+         <td>     
+              <form action="invoice">
+        <input type="Date" name="deliveryDate" id="datefield"  list ="date" autofocus required placeholder="delivery no of days"  ><br><br>
+              <button type="submit">Submit</button>
+              
+              </form></td>
+              <c:set var="orderid" value="${purchaselist.cartId}" scope="session" />
+              <c:set var="userid" value="${purchaselist.userId}" scope="session" />
       
           </tr>
-           <%} %>
-     
+      </c:forEach>        
+              
+             
+       
       </table>
 </body>
+<script type="text/javascript">
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; 
+var yyyy = today.getFullYear();
+if(dd<10){
+  dd='0'+dd
+} 
+if(mm<10){
+  mm='0'+mm
+} 
+
+today = yyyy+'-'+mm+'-'+dd;
+document.getElementById("datefield").setAttribute("min", today);
+</script>
+
 </html>

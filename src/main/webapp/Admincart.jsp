@@ -1,6 +1,7 @@
    
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
  <%@ page import="java.sql.ResultSet"
  import ="com.stock.impl.*" %>   
 <!DOCTYPE html>
@@ -118,7 +119,7 @@ body {
     <a href="invoice.jsp" >Invoice</a>
    
      <a href="index.jsp" style=float:right>Logout</a>
-    <a href="Admincart.jsp">Cart</a>
+    <a href="Admincart">Cart</a>
       <div class="dropdown">
       <button class="dropbtn" >StockItem Add
         <i class="fa fa-caret-down"></i>
@@ -134,12 +135,12 @@ body {
     </div>
 <div class="container">    
     
-      <%
+    <%--   <%
       CartImpl cimpl=new CartImpl();
       ResultSet rs=  cimpl.viewCart();
           //(ResultSet)session.getAttribute("showProduct");
       %>
-    <br>
+     --%><br>
      <table border=1 style="width:80%;margin-left:100px;">
           <tr>
             
@@ -153,25 +154,21 @@ body {
           </tr>
        
        
+        <c:forEach items="${admincart}" var="adminview"> 
        
-         <% while(rs.next())
-        { 
        
-        %>
           <tr>
             
-            <td><%=rs.getInt(1)%></td>
-            <a><td><%=rs.getInt(2)%></td>
-            <td><%=rs.getInt(3)%></td>
-            <td><%=rs.getInt(4)%></td>
-            <td><%=rs.getDouble(5)%></td>
-            <td><%=rs.getDate(6)%></td>
-            
-           		
+            <td>${adminview.cartId} </td>
+            <a><td>${adminview.userId}</td>
+            <td>${adminview.productId}</td>
+            <td>${adminview.qunatity}</td>
+            <td>${adminview.totalPrice}</td>
+            <td>${adminview.expectedDate}</td>
       
           </tr>
-           <%} %>
-     
+           
+     </c:forEach>
       </table>
 </body>
 </html>

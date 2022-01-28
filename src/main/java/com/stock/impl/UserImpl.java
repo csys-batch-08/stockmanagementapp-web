@@ -5,10 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import com.stock.dao.UserDao;
+import com.stock.model.Cart;
 import com.stock.model.Stock;
 import com.stock.model.User;
 import com.stock.util.ConnectionUtil;
@@ -47,7 +50,7 @@ String query="insert into users(user_name,email,address,password,phonenumber)val
 	}
 
 	public ResultSet validateUser(User us)   {
-		User user=null;
+    User user=null;
 	String	emailid=null;
 	String	password=null;
 		ConnectionUtil connect=new ConnectionUtil();
@@ -64,7 +67,7 @@ String query="insert into users(user_name,email,address,password,phonenumber)val
 					e.printStackTrace();
 				}
 			System.out.println("hello"+us.getEmail()+" "+us.getPassword());
-			String query="select * from users where email='"+us.getEmail()+"' and password='"+us.getPassword()+"'";
+			String query="select user_id,user_name,email,address,password,phonenumber,usertype,wallet from users where email='"+us.getEmail()+"' and password='"+us.getPassword()+"'";
 			
 			Statement stmt=con.createStatement();
 			rs=stmt.executeQuery(query);
@@ -146,25 +149,45 @@ String query="insert into users(user_name,email,address,password,phonenumber)val
 		}
 		
 	}
-	public ResultSet walletamount(int userid) throws ClassNotFoundException, SQLException {
-		String updatewallet = "select * from users where user_id=?";
-
-		Connection con;
-		con = ConnectionUtil.gbConnection();
-		PreparedStatement pstmt = con.prepareStatement(updatewallet);
-		pstmt.setInt(1, userid);
-		ResultSet rs=pstmt.executeQuery();
-		return rs;
+	public User walletAmount(int userid){
 		
-	}
+		String updatewallet = "select wallet from users where user_id=?";
+		User user=null;
+	try {
+			Connection con = null;
+			try {
+				con = ConnectionUtil.gbConnection();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			PreparedStatement pstmt = con.prepareStatement(updatewallet);
+			pstmt.setInt(1, userid);
+			ResultSet rs = pstmt.executeQuery();
+		while(rs.next()){
+				
+				 user=new User(rs.getDouble(1));
+				System.out.println(user);
+				
+				
+			}} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return user;
+				
+				
+				
+	}		
 	
-	public  ResultSet showuser()  {
+	public  List<User> showuser()  {
+		List<User> adminuserview=new ArrayList<User>();
 		Connection con;
 		ResultSet rs=null;
 		
 		
 		
-          String showquery="select*from users where usertype='user'";
+          String showquery="select user_id,user_name,email,address,password,phonenumber,wallet from users";
 			
 	
 		
@@ -174,22 +197,28 @@ String query="insert into users(user_name,email,address,password,phonenumber)val
 				
 				Statement stmt = con.createStatement();
 				rs = stmt.executeQuery(showquery);
+         while(rs.next()) {
+					
+					User user=new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getLong(6), rs.getDouble(7));
+					adminuserview.add(user);
+				}
 			
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
-			return rs;
+			return adminuserview;
 			
 	
 	
 	
 	}
-	public  ResultSet userview(int userid)  {
+	public  List<User> userview(int userid)  {
+		List<User> userDetails= new ArrayList<User>();
 		Connection con;
 		ResultSet rs=null;
-	 String usershow= "select * from users where user_id=?";
+	 String usershow= "select user_id,user_name,email,address,password,phonenumber,wallet from users where user_id=?";
 			try {
 				
 				con = ConnectionUtil.gbConnection();
@@ -197,14 +226,18 @@ String query="insert into users(user_name,email,address,password,phonenumber)val
 				PreparedStatement pstmt = con.prepareStatement(usershow);
 				pstmt.setInt(1, userid);
 				 rs=pstmt.executeQuery();
-				
+				while(rs.next()) {
+					
+					User user=new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getLong(6), rs.getDouble(7));
+					userDetails.add(user);
+				}
 						
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
-			return rs;
+			return userDetails;
 			
 	
 	

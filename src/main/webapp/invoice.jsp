@@ -1,6 +1,7 @@
    
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+       <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
  <%@ page import="java.sql.ResultSet"
  import ="com.stock.impl.*" %>   
 <!DOCTYPE html>
@@ -134,12 +135,12 @@ body {
 
 <div class="container">    
     
-      <%
+     <%--  <%
       InvoiceImpl impl=new InvoiceImpl();
       ResultSet rs=  impl.showInvoice();
           //(ResultSet)session.getAttribute("showProduct");
       %>
-    <br>
+    --%> <br>
      <table  border=1 style="width:80%;margin-left:100px;">
           <tr>
            <th scope="col">BillId</th>
@@ -150,24 +151,20 @@ body {
           </tr>
        
        
-       
-         <% while(rs.next())
-        { 
-       
-        %>
+       <c:forEach items ="${admininvoice}" var="invoiceview">
+            
+          
+         
+        <tbody>
           <tr>
             
-            <td><%=rs.getInt(1)%></td>
-            <a><td><%=rs.getInt(2)%></td>
-             <td><%=rs.getString(3)%></td>
-             <td><%=rs.getDate(4)%></td>
-             <td><%=rs.getInt(5)%></td>
-        
-           		
-      
-          </tr>
-           <%} %>
-     
+            <td>${invoiceview.billId} </td>
+            <td>${invoiceview.orderId}</td>
+            <td>${invoiceview.status}</td>
+            <td>${invoiceview.deliveryDate}</td>
+            <td>${invoiceview.userId}</td>
+    </tr>
+    </c:forEach>
       </table>
 </body>
 </html>

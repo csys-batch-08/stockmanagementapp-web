@@ -127,7 +127,7 @@ table, th, td {
 
 		<%
 		while (rs.next()) {
-			System.out.println("search");
+			
 		%>
 		<tr>
 

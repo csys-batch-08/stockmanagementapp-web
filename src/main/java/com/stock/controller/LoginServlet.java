@@ -15,10 +15,11 @@ import com.stock.exception.InvalidUserException;
 import com.stock.impl.UserImpl;
 import com.stock.model.User;
 
+
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/login1")
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,15 +36,15 @@ public class LoginServlet extends HttpServlet {
 		try {
 			
 		if(	rs.next()) {
-			session.setAttribute("user id", rs.getInt(1));
+			session.setAttribute("userid", rs.getInt(1));
 			session.setAttribute("walletamount", rs.getDouble(8));
 			if(rs.getString(7).equals("admin")) {
 				
-				response.sendRedirect("stockItemsadmin.jsp");
+				response.sendRedirect("stockItemsadmin");
 				
 			}
 			else {
-				response.sendRedirect("stockItemsusers.jsp");
+				response.sendRedirect("stockItemsUser");
 			}
 		}
 		else {

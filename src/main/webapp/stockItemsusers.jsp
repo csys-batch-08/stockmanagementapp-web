@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.sql.ResultSet" import="com.stock.impl.*"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,16 +83,16 @@ table, th, td {
 	</div>
 	<br>
 	<ul>
-        <li><a class="active" href="stockItemsusers.jsp">Stock Item</a></li>
-        <li><a class="active" href="usercart.jsp"> My Cart</a></li>
+        <li><a class="active" href="stockItemsUser">Stock Item</a></li>
+        <li><a class="active" href="usercart"> My Cart</a></li>
      
-         <li><a class="active" href="userview.jsp">My Profile</a></li>
+         <li><a class="active" href="userview">My Profile</a></li>
         
       
          <li style="float: right;"><a class="active" href="index.jsp">Logout</a></li>
         <li style="float: right;"><a class="active" href="walletrecharge.jsp">Wallet</a></li>
-        <li><a  class="active" href = "userpurchaselist.jsp">My order List</a></li>
-           <li> <a  class="active"href = "userinvoice.jsp">  Invoice </a></li>
+        <li><a  class="active" href = "userpurchaselist">My order List</a></li>
+           <li> <a  class="active"href = "userinvoice">  Invoice </a></li>
              <li><a class="active" href="#help">Help</a></li>
         <br><br>
       </ul>
@@ -103,13 +104,6 @@ table, th, td {
 		<button type="submit">search</button>
 		</div>
 	</form>
-
-	<%
-	StockImpl stock = new StockImpl();
-
-	ResultSet rs = stock.showProduct();
-	//(ResultSet)session.getAttribute("showProduct");
-	%>
 
 	<br>
 	<table style="width: 80%; margin-left: 100px;">
@@ -124,23 +118,22 @@ table, th, td {
 
 
 
-		<%
-		while (rs.next()) {
-		%>
-		<tr>
-
-			<td><%=rs.getInt(1)%></td>
-			<a><td><%=rs.getString(2)%></td>
-				<td><%=rs.getInt(3)%></td>
-				<td><%=rs.getDouble(4)%></td>
-
-				<td><a href="product.jsp?pname=<%=rs.getString(2)%>">
+	 <c:forEach items ="${products}" var="product">
+         
+        <tbody>
+          <tr>
+            
+            <td>${product.productId} </td>
+            <td>${product.productName}</td>
+            <td>${product.quantity}</td>
+            <td>${product.unitPrice}</td>
+      
+				<td><a href="product?pname=${product.productName}">
+				
 				<button type="button" class="btn btn-primary">select</button></a></td>
 		</tr>
-		<%
-		}
-		%>
-
+		
+</c:forEach>
 	</table>
 </body>
 </html>

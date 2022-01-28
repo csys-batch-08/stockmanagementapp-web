@@ -1,6 +1,7 @@
    
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
  <%@ page import="java.sql.ResultSet"
  import ="com.stock.impl.*" %>   
 <!DOCTYPE html>
@@ -131,18 +132,10 @@ body {
     <a href="purchaseList.jsp">PurchaseList</a>
   
     </div>
- <a href = "AdminPurchaseCheck.jsp" style=float:right >Order Delivery Date</a>
-    <a href="purchaseList.jsp">PurchaseList</a>
+    
   
     </div>
-      <%
-      
-      
-      UserImpl userview=new UserImpl();
-      ResultSet rs= userview.showuser();
-          //(ResultSet)session.getAttribute("showProduct");
-      %>
-    <br>
+     <br>
      <table border=1; style="width:90%;margin-left:100px; border-collapse:collapse ">
           <tr>
             
@@ -152,37 +145,32 @@ body {
              <th scope="col">Address</th>
             <th scope="col">Password</th>
             <th scope="col">PhoneNumber</th>
-            
-            <th scope="col">UserType</th>
             <th scope="col">WalletAmount</th>
+            
+            
             
           </tr>
        
        
+     
+      <c:forEach items="${adminUserDetail}" var="adminUserDetailsView"> 
        
-         <% while(rs.next())
-        { 
        
-        %>
           <tr>
             
-            <td><%=rs.getInt(1)%></td>
-            <a><td><%=rs.getString(2)%></td>
-            <td><%=rs.getString(3)%></td>
-             <td><%=rs.getString(4) %></td>
-              <td><%=rs.getString(5)%></td>
-            <td><%=rs.getLong(6)%></td>
-                <td><%=rs.getString(7)%></td>
-             <td><%=rs.getDouble(8)%></td>
-            
-            
-              <td>
-              
-              
+            <td>${adminUserDetailsView.userId}</td>
+            <td>${adminUserDetailsView.userName}</td>
+            <td>${adminUserDetailsView.email}</td>
+             <td>${adminUserDetailsView.address}</td>
+            <td>${adminUserDetailsView.password}</td>
+            <td>${adminUserDetailsView.phoneNumber}</td>
+     	    <td>${adminUserDetailsView.wallet}</td>
+     	    
            		
       
           </tr>
-           <%} %>
+      </c:forEach>          
+         
      
       </table>
 </body>

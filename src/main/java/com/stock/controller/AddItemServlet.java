@@ -18,13 +18,13 @@ public class AddItemServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		String proname1=req.getParameter("proname1");
-		System.out.println(proname1);
+		
 		
 		int quantity=Integer.parseInt(req.getParameter("quantity"));
-		System.out.println(quantity);
+		
 		
 		double price=Double.parseDouble(req.getParameter("amount"));
-		System.out.println(price);
+		
 		
 		Stock stock=new Stock(proname1,quantity,price);
 		System.out.println(proname1+quantity+price);

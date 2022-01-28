@@ -141,6 +141,25 @@ public class User {
 		super();
 		this.email = email;
 	}
+
+
+	public User(int userId, String userName, String email, String address, String password, long phoneNumber,
+			double wallet) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.email = email;
+		this.address = address;
+		this.password = password;
+		this.phoneNumber = phoneNumber;
+		this.wallet = wallet;
+	}
+
+
+	public User(double wallet) {
+		super();
+		this.wallet = wallet;
+	}
 		
 	
 	

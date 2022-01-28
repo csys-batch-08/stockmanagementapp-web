@@ -14,42 +14,45 @@ import com.stock.util.ConnectionUtil;
 
 public class StockImpl  implements StockDao{
 
-	public ResultSet showProduct() {
-		String prod = "select * from stock";
+	public List<Stock>  showProducts() {
+		List<Stock> productsList=new ArrayList<Stock>();
+
+		String prod = "select product_id,product_name,product_qty,price from stock ORDER BY product_id";
 		Connection con;
 		ResultSet rs=null;
 		try {
 			con = ConnectionUtil.gbConnection();
 			Statement stmt = con.createStatement();
 			rs = stmt.executeQuery(prod);
-//			while (rs.next()) {
-//				System.out.format("%-5s%-15s%-10s%-5s\n", rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDouble(4));
-//				//System.out.println();
-//			}
-		
+			while (rs.next()) {
+				
+				Stock stock= new Stock (rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDouble(4));
+				productsList.add(stock);
+}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return rs;
+		return productsList;
 	}
+	
+	
+	
+	
+	
 	public ResultSet serachProduct(String proName) {
-		String pro = "select * from stock where lower(product_name ) like '"+proName  +"%' ";
+		String pro = "select product_id,product_name,product_qty,price from stock where lower(product_name ) like '"+proName  +"%' ";
 				ResultSet rs=null;
 		try {
 			System.out.println("sercahpro"+proName);
 			Connection con = ConnectionUtil.gbConnection();
 
-			
-			
-			PreparedStatement pre=con.prepareStatement(pro);
+		PreparedStatement pre=con.prepareStatement(pro);
 			
 			
 			rs = pre.executeQuery();
-//			if(rs.next()) {
-//				System.out.println(rs.getString(1) + "xcvbghnjk");
-//			}
+
 		System.out.println("serach");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -74,10 +77,10 @@ public class StockImpl  implements StockDao{
 				pstmt.setString(1, productName);
 				
 				ResultSet rs=pstmt.executeQuery();
-				System.out.println("helllo");
+				
 				
 				if(rs.next()) {
-					System.out.println("helo");
+					
 					
 					proname=rs.getString(1);
 					
@@ -196,9 +199,9 @@ public class StockImpl  implements StockDao{
 		}
 	}
 
-	public ResultSet validateProduct(String proName) {
-
-		String validdateQuery = "select * from stock where product_name=?";
+	public List<Stock> validateProduct(String proName) {
+		List<Stock> products=new ArrayList<Stock>();
+		String validdateQuery = "select product_id,product_name,product_qty,price from stock where product_name=?";
 
 		
 		try {
@@ -206,28 +209,26 @@ public class StockImpl  implements StockDao{
 			PreparedStatement pstmt = con.prepareStatement(validdateQuery);
 			pstmt.setString(1, proName);
 			ResultSet rs = pstmt.executeQuery();
-			return rs;
-//			if (rs.next()) {
-//				Stock stock = new Stock(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDouble(4));
-//				System.out.println();
-//            return stock;
-//			}
 			
-
-		} catch (ClassNotFoundException e) {
+			while (rs.next()) {
+				
+				Stock stock = new Stock(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDouble(4));
+				products.add(stock);
+			}
+			} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return products;
 	
 
 	}
 	public Stock validateProductId(int productId) {
 
-		String validdateQuery = "select *from stock where product_id=?";
+		String validdateQuery = "select product_id,product_name,product_qty,price from stock where product_id=?";
 
 		try {
 			Connection con = ConnectionUtil.gbConnection();
@@ -250,5 +251,9 @@ public class StockImpl  implements StockDao{
 		return null;
 
 	}
+
+
+
+
 
 }

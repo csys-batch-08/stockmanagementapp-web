@@ -1,8 +1,8 @@
    
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- <%@ page import="java.sql.ResultSet"
- import ="com.stock.impl.*" %>   
+    <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+   
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,11 +80,11 @@ body
              <li><a class="active" href="#help">Help</a></li>
         <br><br>
       </ul>
-      <%int user_id=Integer.parseInt(session.getAttribute("user id").toString());
+     <%--  <%int user_id=Integer.parseInt(session.getAttribute("user id").toString());
       CartImpl cimpl=new CartImpl();
       ResultSet rs=  cimpl.allcart(user_id);
           //(ResultSet)session.getAttribute("showProduct");
-      %>
+      %> --%>
     <br>
      <table style="width:80%;margin-left:100px;">
           <tr>
@@ -98,27 +98,32 @@ body
            
             <th>Purchase</th>
           </tr>
+      <c:forEach items="${usercartview}" var="userview"> 
        
        
-       
-         <% while(rs.next())
-        { 
-       
-        %>
           <tr>
             
-            <td><%=rs.getInt(1)%></td>
-            <a><td><%=rs.getInt(2)%></td>
-            <td><%=rs.getInt(3)%></td>
-            <td><%=rs.getInt(4)%></td>
-            <td><%=rs.getDouble(5)%></td>
-            <td><%=rs.getDate(6)%></td>
-            <td><a href="purchase.jsp?cartid=<%=rs.getInt(1)%>"><button type="button" class="btn btn-primary">Buy</button></a></td>
+            <td>${userview.cartId}</td>
+            <td>${userview.userId}</td>
+            <td>${userview.productId}</td>
+            <td>${userview.qunatity}</td>
+            <td>${userview.totalPrice}</td>
+            <td>${userview.expectedDate}</td>
+            
+            <td><a href="purchase1?cartid=${userview.cartId}"><button type="button" class="btn btn-primary">Buy</button></a></td>
            		
       
+        <c:set var="cartid" value="${userview.cartId}" scope="session" />
+         <c:set var="userid" value="${userview.userId}" scope="session" />
+         <c:set var="proid" value="${userview.productId}" scope="session" />
+         <c:set var="proqty" value="${userview.qunatity}" scope="session" />
+        <c:set var="price" value="${userview.totalPrice}" scope="session" />
+        <c:set var="date" value="${userview.expectedDate}" scope="session" />
+      
+      
           </tr>
-           <%} %>
-     
+           
+     </c:forEach>
       </table>
 </body>
 </html>

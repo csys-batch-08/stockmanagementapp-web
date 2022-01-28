@@ -5,16 +5,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.stock.dao.PurchaseDao;
+import com.stock.model.Cart;
 import com.stock.model.Purchase;
 import com.stock.util.ConnectionUtil;
 
 public class PuruchaseImpl  implements PurchaseDao{
 public int insert(Purchase purchase)  {
-	String updateQuery1="select wallet from users where user_id='"+purchase.getUserId()+"'";	
-	String updateQuery="update users set wallet=(select wallet from users where user_id=?)-? where user_id=?";
-		String insertQuery="insert into purchases_list (product_id,user_id,product_name,quantity,total_price )values (?,?,?,?,?)";
+	String updateQuery1="select wallet from users where user_id='"+purchase.getUserId()+"'";
+	
+	String updateQuery="update users set wallet= wallet - ? where user_id=?";
+	
+    String insertQuery="insert into purchases_list (product_id,user_id,product_name,quantity,total_price )values (?,?,?,?,?)";
 		int num=0;
 		Connection con;
 		try {
@@ -27,10 +32,10 @@ public int insert(Purchase purchase)  {
 			}
 			if(wallet>purchase.getTotalPrice()) {
 			PreparedStatement pstmt1= con.prepareStatement(updateQuery);
-			pstmt1.setInt(1, purchase.getUserId());
-			pstmt1.setDouble(2, purchase.getTotalPrice());
-			pstmt1.setInt(3, purchase.getUserId());
-			int j=pstmt1.executeUpdate();
+			pstmt1.setDouble(1, purchase.getTotalPrice());
+			pstmt1.setInt(2, purchase.getUserId());
+			
+	        int j=pstmt1.executeUpdate();
 			System.out.println("updated"+j);
 			
 			PreparedStatement pstmt= con.prepareStatement(insertQuery);
@@ -39,7 +44,7 @@ public int insert(Purchase purchase)  {
 			pstmt.setString(3, purchase.getProductName());
 			pstmt.setInt(4, purchase.getOrderQty());
 			pstmt.setDouble(5, purchase.getTotalPrice());
-			//pstmt.setDate(5, new java.sql.Date( purchase.getOrderDate().getTime()));
+			
 			int i=pstmt.executeUpdate();
 			System.out.println(i+ "inserted");
 			pstmt.close();
@@ -101,43 +106,71 @@ public void updated(Purchase purchase1 )  {
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	}
+	}	
 		}
 	
-	public ResultSet showPurchase() {
-		String showquery = "select * from purchases_list";
-		Connection con;
-		ResultSet rs=null;
-		try {
-			con = ConnectionUtil.gbConnection();
-			Statement stmt = con.createStatement();
-			rs = stmt.executeQuery(showquery);
-		} catch (Exception e) {
+	public List<Purchase> viewpurchase(){
+		List<Purchase> adminpurchaseview = new ArrayList<Purchase>();
+		String showquery = "select oreder_id,product_id,user_id,product_name,quantity,total_price,status,order_date from purchases_list";
+		
+			Connection con = null;
+			try {
+				
+					try {
+						con = ConnectionUtil.gbConnection();
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					Statement stmt = con.createStatement();
+					ResultSet	rs = stmt.executeQuery(showquery);
+					while(rs.next()){
+						
+						Purchase purchase=new Purchase(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4),rs.getInt(5), rs.getDouble(6),rs.getString(7), rs.getDate(8));
+						
+						 adminpurchaseview .add(purchase);
+					}
+				}
+			 catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		return rs;
-	}
-	public ResultSet userPurchaselist(int userid) {
-		String usershow = "select * from purchases_list where user_id =?";
-		Connection con;
-		ResultSet rs=null;
-		try {
-			con = ConnectionUtil.gbConnection();
-			PreparedStatement pstmt= con.prepareStatement(usershow);
-
-			pstmt.setInt(1, userid);
+		return  adminpurchaseview ;
+	
 			
-			rs = pstmt.executeQuery();
-		} catch (Exception e) {
+	}	
+	
+	public List<Purchase> userPurchase(int userid){
+		
+		String userpurchaseshow = "select oreder_id,product_id,user_id,product_name,quantity,total_price,status,order_date from purchases_list where user_id =?";
+		List<Purchase> userpurchase=new ArrayList<Purchase>();
+		
+		try {
+			Connection con = null;
+			try {
+				con = ConnectionUtil.gbConnection();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			PreparedStatement pstmt = con.prepareStatement(userpurchaseshow);
+			pstmt.setInt(1, userid);
+			ResultSet rs = pstmt.executeQuery();
+		while(rs.next()){
+				
+			Purchase purchase=new Purchase(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4),rs.getInt(5), rs.getDouble(6),rs.getString(7), rs.getDate(8));
+				
+				userpurchase.add(purchase);
+				
+			}} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		return rs;
-	}
-
+		return userpurchase;
+				
+				
+				
+	}		
 		
 		
 

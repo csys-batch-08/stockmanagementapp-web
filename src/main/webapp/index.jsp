@@ -36,7 +36,7 @@
   <div class="con1">
 
     <h1>Login</h1>
-    <form action="login1" method="post">
+    <form action="login" method="post">
       <label for="">Email :</label><br>
       <input type="text" name="email"><br><br>
       <label for="">Password :</label><br>

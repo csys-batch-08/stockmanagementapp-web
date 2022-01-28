@@ -1,6 +1,7 @@
    
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
  <%@ page import="java.sql.ResultSet"
  import ="com.stock.impl.*" %>   
 <!DOCTYPE html>
@@ -79,12 +80,12 @@ body
            <li> <a  class="active"href = "userinvoice.jsp">  Invoice </a></li>
              <li><a class="active" href="#help">Help</a></li>
         <br><br>
-      </ul>   <%
+      </ul>  <%--  <%
       int user_id=Integer.parseInt(session.getAttribute("user id").toString());
       PuruchaseImpl pimpl=new  PuruchaseImpl();
       ResultSet rs=  pimpl.userPurchaselist(user_id);
           //(ResultSet)session.getAttribute("showProduct");
-      %>
+      %> --%>
     <br>
      <table style="width:80%;margin-left:100px;">
           <tr>
@@ -101,28 +102,23 @@ body
           </tr>
        
        
+          <c:forEach items="${userpurchase}" var="userpurchase"> 
        
-         <% while(rs.next())
-        { 
        
-        %>
           <tr>
             
-            <td><%=rs.getInt(1)%></td>
-            <a><td><%=rs.getInt(2)%></td>
-            <td><%=rs.getInt(3)%></td>
-             <td><%=rs.getString(4) %></td>
-              <td><%=rs.getInt(5)%></td>
-            <td><%=rs.getDouble(6)%></td>
-             <td><%=rs.getString(7)%></td>
-            
-             <td><%=rs.getDate(8)%></td>
-            
-         	
+            <td>${userpurchase.cartId}</td>
+            <td>${userpurchase.productId}</td>
+            <td>${userpurchase.userId}</td>
+             <td>${userpurchase.productName}</td>
+            <td>${userpurchase.orderQty}</td>
+            <td>${userpurchase.totalPrice}</td>
+     	    <td>${userpurchase.status}</td>
+     	    <td>${userpurchase.orderDate}</td>
            		
       
           </tr>
-           <%} %>
+      </c:forEach>    
      
       </table>
 </body>

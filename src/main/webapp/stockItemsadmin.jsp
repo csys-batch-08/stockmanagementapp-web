@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+    
  <%@ page import="java.sql.ResultSet"
  import ="com.stock.impl.*" %>   
 <!DOCTYPE html>
@@ -111,12 +113,12 @@ body {
         <center><h1 >STOCK INVENTORY MANAGEMENT</h1></center>
     </div>
    <div class="topnav" id="myTopnav">
-   <a href="stockItemsadmin.jsp" >Stock</a>
-   
+   <a href="stockItemsadmin" >Stock</a>
+    <a href="adminuserview" >UserDetails</a>
     <a href="invoice.jsp" >Invoice</a>
    
      <a href="index.jsp" style=float:right>Logout</a>
-    <a href="Admincart.jsp">Cart</a>
+    <a href="Admincart">Cart</a>
       <div class="dropdown">
       <button class="dropbtn" >StockItem Add
         <i class="fa fa-caret-down"></i>
@@ -126,18 +128,10 @@ body {
        
       </div>
     </div>
-    <a href = "AdminPurchaseCheck.jsp" style=float:right >Order Delivery Date</a>
-    <a href="purchaseList.jsp">PurchaseList</a>
+    <a href = "admin" style=float:right >Order Delivery Date</a>
+    <a href="Allpurchaselist">PurchaseList</a>
   
     </div>
-    <%
-      StockImpl stock=new StockImpl();
-            
-            
-          ResultSet rs=  stock.showProduct();
-          //(ResultSet)session.getAttribute("showProduct");
-      %>
-    <br>
     <div class="container">
      <table border=1 style="width:80%;margin-left:100px;">
           <tr>
@@ -154,27 +148,26 @@ body {
    
        
          
-       
-         <% while(rs.next())
-        { 
-       
-        %>
+       <c:forEach items ="${products}" var="product">
+         
         <tbody>
           <tr>
             
-            <td><%=rs.getInt(1)%></td>
-            <a><td><%=rs.getString(2)%></td>
-            <td><%=rs.getInt(3)%></td>
-            <td><%=rs.getDouble(4)%></td>
-          	<td><a href="updateitem.jsp?name=<%=rs.getString(2) %>"><button type="button" class="btn btn-primary">Update Quantity</button></a></td>
+            <td>${product.productId} </td>
+            <a><td>${product.productName}</td>
+            <td>${product.quantity}</td>
+            <td>${product.unitPrice}</td>
+          	<td><a href="updateitem.jsp?name=${product.productName}"><button type="button" class="btn btn-primary">Update Quantity</button></a></td>
           	
-           	<td><a href="deleteproduct.jsp?proid=<%=rs.getInt(1) %>"><button type="button" class="btn btn-dark">Delete Product</button></a></td>	
+           	<td><a href="deleteproduct.jsp?proid=${product.productId}"><button type="button" class="btn btn-dark">Delete Product</button></a></td>	
       
           </tr>
+          </c:forEach>
           </tbody>
-           <%} %>
+         
      
       </table>
+      
       </div>
 </body>
 </html>

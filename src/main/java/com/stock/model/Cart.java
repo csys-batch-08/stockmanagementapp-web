@@ -3,18 +3,17 @@ package com.stock.model;
 import java.util.Date;
 
 public class Cart {
-private int cartid;
+private int cartId;
 private int userId;
 private int productId;
 private int qunatity;
 private double totalPrice;
-private int expectedDate;
-
-public int getCart() {
-	return cartid;
+private Date expectedDate;
+public int getCartId() {
+	return cartId;
 }
-public void setCart(int cart) {
-	this.cartid = cart;
+public void setCartId(int cartId) {
+	this.cartId = cartId;
 }
 public int getUserId() {
 	return userId;
@@ -40,28 +39,22 @@ public double getTotalPrice() {
 public void setTotalPrice(double totalPrice) {
 	this.totalPrice = totalPrice;
 }
-public int getExpectedDate() {
+public Date getExpectedDate() {
 	return expectedDate;
 }
-public void setExpectedDate(int expectedDate) {
+public void setExpectedDate(Date expectedDate) {
 	this.expectedDate = expectedDate;
 }
-@Override
-public String toString() {
-	return "Cart [cart=" + cartid + ", userId=" + userId + ", productId=" + productId + ", qunatity=" + qunatity
-			+ ", totalPrice=" + totalPrice + ", expectedDate=" + expectedDate + "]";
-}
-public Cart(int cartid, int userid, int productId, int quantity, int totalPrice, int date) {
-	
-	// TODO Auto-generated constructor stub
-	this.cartid=cartid;
-	this.userId = userid;
+public Cart(int cartId, int userId, int productId, int qunatity, double totalPrice, Date expectedDate) {
+	super();
+	this.cartId = cartId;
+	this.userId = userId;
 	this.productId = productId;
-	this.qunatity = quantity;
+	this.qunatity = qunatity;
 	this.totalPrice = totalPrice;
-	this.expectedDate = date;
+	this.expectedDate = expectedDate;
 }
-public Cart(int userId, int productId, int qunatity, double totalPrice, int expectedDate) {
+public Cart(int userId, int productId, int qunatity, double totalPrice, Date expectedDate) {
 	super();
 	this.userId = userId;
 	this.productId = productId;
@@ -69,7 +62,7 @@ public Cart(int userId, int productId, int qunatity, double totalPrice, int expe
 	this.totalPrice = totalPrice;
 	this.expectedDate = expectedDate;
 }
-public Cart(int productId,int userId) {
+public Cart(int productId , int userId) {
 	super();
 	this.userId = userId;
 	this.productId = productId;

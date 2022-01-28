@@ -90,32 +90,29 @@ margin-left:500px;
  --%>    <br>
      <table border=1; style="width:90%;margin-left:100px; border-collapse:collapse ">
            <tr>
-            
+          <th scope="col">CartId</th>
             <th scope="col">UserId</th>
-            <th scope="col">UserName</th>
-            <th scope="col">Email</th>
-             <th scope="col">Address</th>
-            <th scope="col">Password</th>
-            <th scope="col">PhoneNumber</th>
-            <th scope="col">WalletAmount</th>
-  
-            
+             <th scope="col">ProductId</th>
+            <th scope="col">ProductQuantity</th>
+            <th scope="col">TotalPrice</th>
+            <th scope="col">Date</th>
+                     
             
           </tr>
        
        
-      <c:forEach items="${userDetail}" var="userDetailsView"> 
+      <c:forEach items="${userview}" var="userview"> 
        
        
           <tr>
             
-            <td>${userDetailsView.userId}</td>
-            <td>${userDetailsView.userName}</td>
-            <td>${userDetailsView.email}</td>
-             <td>${userDetailsView.address}</td>
-            <td>${userDetailsView.password}</td>
-            <td>${userDetailsView.phoneNumber}</td>
-     	    <td>${userDetailsView.wallet}</td>
+            <td>${userview.cartId}</td>
+            <td>${userview.userId}</td>
+            <td>${userview.productId}</td>
+            <td>${userview.qunatity}</td>
+            <td>${userview.totalPrice}</td>
+            <td>${userview.expectedDate}</td>
+            
      	    
            		
       
