@@ -1,6 +1,7 @@
 package com.stock.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,7 +25,7 @@ public class CartServlet extends HttpServlet {
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session=req.getSession();
-		
+		PrintWriter out=resp.getWriter();
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		 Date dt=null;
 		try {
@@ -73,9 +74,15 @@ public class CartServlet extends HttpServlet {
 					
 				}
 		}catch(InsufficientQuantityException e) {
-			session.setAttribute("qtyerror",e.getMessage());
-		
-			resp.sendRedirect("product.jsp");
+
+			
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('Insufficient Quantity');");
+			out.println("location='product.jsp';");
+			out.println("</script>");
+
+			
+			
 			
 		}
 		

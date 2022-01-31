@@ -115,7 +115,7 @@ body {
    <div class="topnav" id="myTopnav">
    <a href="stockItemsadmin" >Stock</a>
     <a href="adminuserview" >UserDetails</a>
-    <a href="invoice.jsp" >Invoice</a>
+    <a href="invoiceview" >Invoice</a>
    
      <a href="index.jsp" style=float:right>Logout</a>
     <a href="Admincart">Cart</a>
@@ -157,9 +157,12 @@ body {
             <a><td>${product.productName}</td>
             <td>${product.quantity}</td>
             <td>${product.unitPrice}</td>
-          	<td><a href="updateitem.jsp?name=${product.productName}"><button type="button" class="btn btn-primary">Update Quantity</button></a></td>
+            
+            
+          	<td><a href="updateitem?name=${product.productName}"><button type="button" class="btn btn-primary">Update Quantity</button></a></td>
           	
-           	<td><a href="deleteproduct.jsp?proid=${product.productId}"><button type="button" class="btn btn-dark">Delete Product</button></a></td>	
+           	<td><a href="deleteproduct?proid=${product.productId}"><button type="button" class="btn btn-dark">Delete Product</button></a></td>	
+      
       
           </tr>
           </c:forEach>

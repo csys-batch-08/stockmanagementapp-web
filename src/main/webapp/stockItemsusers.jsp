@@ -96,7 +96,7 @@ table, th, td {
              <li><a class="active" href="#help">Help</a></li>
         <br><br>
       </ul>
-      	<form action="searchitem.jsp" method="">
+      	<form action="searchitem" method="">
 		Enter Product Name:<br> <input type="text" name="proname"
 			id="proname"><br>
 		<br>

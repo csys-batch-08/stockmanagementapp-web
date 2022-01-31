@@ -1,6 +1,7 @@
 package com.stock.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,7 @@ public class PurchaseListServlet extends HttpServlet {
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		HttpSession session = request.getSession();	
-		
+		PrintWriter out=response.getWriter();
 		int productid = Integer.parseInt(session.getAttribute("proid").toString());
 		System.out.println(productid);
 
@@ -84,10 +85,11 @@ public class PurchaseListServlet extends HttpServlet {
 		response.sendRedirect("userpurchaselist.jsp");
 
 	}catch( InsufficientBalances e) {
-		
-		session.setAttribute("low bal",e.getMessage());
-		
-		response.sendRedirect("purchase.jsp");
+		out.println("<script type=\"text/javascript\">");
+		out.println("alert('InsufficientBalances');");
+		out.println("location='purchase.jsp';");
+		out.println("</script>");
+
 	
 	}
 

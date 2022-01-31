@@ -110,32 +110,35 @@ body {
         <center><h1 >STOCK INVENTORY MANAGEMENT</h1></center>
     </div>
    <div class="topnav" id="myTopnav">
-   <a href="stockItemsadmin.jsp" >Stock</a>
-   
-    <a href="invoice.jsp" >Invoice</a>
+   <a href="stockItemsadmin" >Stock</a>
+    <a href="adminuserview" >UserDetails</a>
+    <a href="invoiceview" >Invoice</a>
    
      <a href="index.jsp" style=float:right>Logout</a>
-    <a href="Admincart.jsp">Cart</a>
+    <a href="Admincart">Cart</a>
       <div class="dropdown">
       <button class="dropbtn" >StockItem Add
         <i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-content">
         <a href="Additems.jsp">Add New Product</a>
-       <a href = "AdminPurchaseCheck.jsp" style=float:right >Order Delivery Date</a>
-    <a href="purchaseList.jsp">PurchaseList</a>
-  
+       
       </div>
+    </div>
+    <a href = "admin" style=float:right >Order Delivery Date</a>
+    <a href="Allpurchaselist">PurchaseList</a>
+  
+    </div>
     </div>
     
     </div>
-  <% String Productname=request.getParameter("name"); %>
+ 
 
 <div class="con">
 <h2>product update</h2>
 <form action="updateitemservlet" method="get">
 	Enter product name:<br>
-	<input type="text" name="proname" id="proname" value=<%=Productname %> ><br>
+	<input type="text" name="proname" id="proname" value="${productName}" ><br>
 	Enter product quantity:<br>
 	<input type="number" name="quantity" id="quantity" list ="quantity"  required placeholder="enter quantity" min="1"><br>
 	

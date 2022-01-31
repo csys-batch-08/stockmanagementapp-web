@@ -114,9 +114,9 @@ body {
     </div>
    
     <div class="topnav" id="myTopnav">
-   <a href="stockItemsadmin.jsp" >Stock</a>
-   
-    <a href="invoice.jsp" >Invoice</a>
+   <a href="stockItemsadmin" >Stock</a>
+    <a href="adminuserview" >UserDetails</a>
+    <a href="invoiceview" >Invoice</a>
    
      <a href="index.jsp" style=float:right>Logout</a>
     <a href="Admincart">Cart</a>
@@ -129,18 +129,12 @@ body {
        
       </div>
     </div>
-    <a href = "AdminPurchaseCheck.jsp" style=float:right >Order Delivery Date</a>
-    <a href="purchaseList.jsp">PurchaseList</a>
+    <a href = "admin" style=float:right >Order Delivery Date</a>
+    <a href="Allpurchaselist">PurchaseList</a>
   
     </div>
+  
 <div class="container">    
-    
-    <%--   <%
-      CartImpl cimpl=new CartImpl();
-      ResultSet rs=  cimpl.viewCart();
-          //(ResultSet)session.getAttribute("showProduct");
-      %>
-     --%><br>
      <table border=1 style="width:80%;margin-left:100px;">
           <tr>
             

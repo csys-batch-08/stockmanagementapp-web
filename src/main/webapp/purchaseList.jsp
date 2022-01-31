@@ -114,12 +114,12 @@ body {
     </div>
    
      <div class="topnav" id="myTopnav">
-   <a href="stockItemsadmin.jsp" >Stock</a>
-   
-    <a href="invoice.jsp" >Invoice</a>
+   <a href="stockItemsadmin" >Stock</a>
+    <a href="adminuserview" >UserDetails</a>
+    <a href="invoiceview" >Invoice</a>
    
      <a href="index.jsp" style=float:right>Logout</a>
-    <a href="Admincart.jsp">Cart</a>
+    <a href="Admincart">Cart</a>
       <div class="dropdown">
       <button class="dropbtn" >StockItem Add
         <i class="fa fa-caret-down"></i>
@@ -129,11 +129,11 @@ body {
        
       </div>
     </div>
-    <a href = "AdminPurchaseCheck.jsp" style=float:right >Order Delivery Date</a>
-    <a href="purchaseList.jsp">PurchaseList</a>
+    <a href = "admin" style=float:right >Order Delivery Date</a>
+    <a href="Allpurchaselist">PurchaseList</a>
   
     </div>
-
+  
    
       <table border=1; style="width:90%;margin-left:100px; border-collapse:collapse ">
           <tr>

@@ -1,6 +1,7 @@
 package com.stock.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -25,6 +26,8 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session=request.getSession();
+		PrintWriter out=response.getWriter();
+
 		System.out.println("login");
 		String mail=request.getParameter("email");
 		String pass=request.getParameter("password");
@@ -58,12 +61,14 @@ public class LoginServlet extends HttpServlet {
  catch (InvalidUserException e) {
 			// TODO Auto-generated catch block
 	 
-	     session.setAttribute("log", e.getMessage());
-	 
-	     response.sendRedirect("index.jsp");
-		}
-		
+	
+	 out.println("<script type=\"text/javascript\">");
+		out.println("alert('Invalid email id or password');");
+		out.println("location='index.jsp';");
+		out.println("</script>");
 
+		
+ }
 		
 		
 		

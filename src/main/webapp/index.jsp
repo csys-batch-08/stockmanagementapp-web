@@ -49,16 +49,7 @@
 
 
 
-    </form>
-    <% String logerror=(String)session.getAttribute("log"); 
-
-if(logerror !=null){
-	%>
-	<h3><%= session.getAttribute("log") %></h3>
-<% }
-session.removeAttribute("log") ;
-%>
-  </div>
+     </div>
 </body>
 
 </html>
