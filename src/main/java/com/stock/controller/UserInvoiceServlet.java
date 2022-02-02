@@ -21,7 +21,7 @@ public class UserInvoiceServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		HttpSession session=req.getSession();
 		int userid=Integer.parseInt(session.getAttribute("userid").toString());
 		InvoiceImpl pimpl =new InvoiceImpl();

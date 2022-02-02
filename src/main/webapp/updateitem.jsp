@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>admin product update</title>
-  <style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock item</title>
+<style>
 body {
       margin: 0;
       font-family: Arial;
@@ -16,6 +18,7 @@ body {
     .topnav {
       overflow: hidden;
       background-color: #333;
+      margin-top:-150px;
     }
 
     .topnav a {
@@ -93,14 +96,12 @@ body {
     }
     .h1
     {
-    background-color:red;
+    background-color:#7c9ce5;
+     margin-top:100px;
     }
-    .con{
+    table{
     margin-top:100px;
-    margin-left:600px;
-    }
-    
-    
+    margin-left:100px;}
 </style>
 </head>
 <body>
@@ -129,17 +130,14 @@ body {
     <a href="Allpurchaselist">PurchaseList</a>
   
     </div>
-    </div>
-    
-    </div>
  
 
 <div class="con">
 <h2>product update</h2>
 <form action="updateitemservlet" method="get">
-	Enter product name:<br>
+	Enter product name<br>
 	<input type="text" name="proname" id="proname" value="${productName}" ><br>
-	Enter product quantity:<br>
+	Enter product quantity<br>
 	<input type="number" name="quantity" id="quantity" list ="quantity"  required placeholder="enter quantity" min="1"><br>
 	
 	

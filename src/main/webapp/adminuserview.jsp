@@ -1,9 +1,8 @@
-   
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
- <%@ page import="java.sql.ResultSet"
- import ="com.stock.impl.*" %>   
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.sql.ResultSet" import="com.stock.impl.*"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock item</title>
-  <style>
+<style>
 body {
       margin: 0;
       font-family: Arial;
@@ -22,6 +21,7 @@ body {
     .topnav {
       overflow: hidden;
       background-color: #333;
+      margin-top:-150px;
     }
 
     .topnav a {
@@ -99,7 +99,8 @@ body {
     }
     .h1
     {
-    background-color:red;
+    background-color:#7c9ce5;
+     margin-top:100px;
     }
     table{
     margin-top:100px;
@@ -112,7 +113,7 @@ body {
     <div class="h1">
         <center><h1 >STOCK INVENTORY MANAGEMENT</h1></center>
     </div>
-       <div class="topnav" id="myTopnav">
+   <div class="topnav" id="myTopnav">
    <a href="stockItemsadmin" >Stock</a>
     <a href="adminuserview" >UserDetails</a>
     <a href="invoiceview" >Invoice</a>
@@ -132,46 +133,49 @@ body {
     <a href="Allpurchaselist">PurchaseList</a>
   
     </div>
-    
-  
-    </div>
-     <br>
-     <table border=1; style="width:90%;margin-left:100px; border-collapse:collapse ">
-          <tr>
-            
-            <th scope="col">UserId</th>
-            <th scope="col">UserName</th>
-            <th scope="col">Email</th>
-             <th scope="col">Address</th>
-            <th scope="col">Password</th>
-            <th scope="col">PhoneNumber</th>
-            <th scope="col">WalletAmount</th>
-            
-            
-            
-          </tr>
-       
-       
-     
-      <c:forEach items="${adminUserDetail}" var="adminUserDetailsView"> 
-       
-       
-          <tr>
-            
-            <td>${adminUserDetailsView.userId}</td>
-            <td>${adminUserDetailsView.userName}</td>
-            <td>${adminUserDetailsView.email}</td>
-             <td>${adminUserDetailsView.address}</td>
-            <td>${adminUserDetailsView.password}</td>
-            <td>${adminUserDetailsView.phoneNumber}</td>
-     	    <td>${adminUserDetailsView.wallet}</td>
-     	    
-           		
-      
-          </tr>
-      </c:forEach>          
-         
-     
-      </table>
+	<table border=1;
+		style="width: 90%; margin-left: 100px; border-collapse: collapse">
+		<tr>
+
+			<th scope="col">User Id</th>
+			<th scope="col">User Name</th>
+			<th scope="col">Email</th>
+			<th scope="col">Address</th>
+			<th scope="col">Phone Number</th>
+			<th scope="col">Wallet Amount</th>
+
+
+
+
+		</tr>
+
+
+
+		<c:forEach items="${adminUserDetail}" var="adminUserDetailsView">
+
+
+			<tr>
+
+				<td>${adminUserDetailsView.userId}</td>
+				<td>${adminUserDetailsView.userName}</td>
+				<td>${adminUserDetailsView.email}</td>
+				<td>${adminUserDetailsView.address}</td>
+				<td>${adminUserDetailsView.phoneNumber}</td>
+				<td>${adminUserDetailsView.wallet}</td>
+
+
+
+
+			</tr>
+		</c:forEach>
+
+
+	</table>
 </body>
 </html>
+
+
+
+
+
+

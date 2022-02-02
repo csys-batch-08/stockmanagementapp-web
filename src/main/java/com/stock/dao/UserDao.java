@@ -6,9 +6,9 @@ import com.stock.model.User;
 
 public interface UserDao {
 	public  int insert(User users);
-	public   ResultSet validateUser(User us);
+	public   User validateUser(User us);
 	public void updated(User userupdate);
-	public void delete(User userdelete);
+	
 	
 	
 }

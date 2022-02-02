@@ -26,12 +26,11 @@ public class UpdateStockServlet extends HttpServlet {
 
 		HttpSession session=request.getSession();
 		String proname=request.getParameter("proname");
-		System.out.println("pothi2");
+		
 		int quantity=Integer.parseInt(request.getParameter("quantity"));
-		System.out.println("pothi3");
-//		double unit_price=0;
-		System.out.println(quantity);
-		System.out.println(proname);
+		
+		
+		
 		Stock stock=new Stock(proname,quantity);
 		StockImpl sdao=new StockImpl();
 		sdao.Adminupdated(stock);

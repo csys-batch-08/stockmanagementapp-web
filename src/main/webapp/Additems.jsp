@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>Admin operations</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add item</title>
 <style>
 body {
       margin: 0;
@@ -16,6 +18,7 @@ body {
     .topnav {
       overflow: hidden;
       background-color: #333;
+      margin-top:-150px;
     }
 
     .topnav a {
@@ -93,11 +96,17 @@ body {
     }
     .h1
     {
-    background-color:red;
+    background-color:#7c9ce5;
+     margin-top:100px;
     }
-    .container{
-    margin-top:100px;
-    margin-left:600px;}
+    
+   .container{
+   
+     margin-top:150px;
+    margin-left:500px
+   
+   }
+    
 </style>
 </head>
 <body>
@@ -106,7 +115,6 @@ body {
     <div class="h1">
         <center><h1 >STOCK INVENTORY MANAGEMENT</h1></center>
     </div>
-   
    <div class="topnav" id="myTopnav">
    <a href="stockItemsadmin" >Stock</a>
     <a href="adminuserview" >UserDetails</a>
@@ -127,18 +135,21 @@ body {
     <a href="Allpurchaselist">PurchaseList</a>
   
     </div>
-  
-<div class="container">    
-    
-    	<h2>Add Item</h2>
-	<form action="additemservlet" method="post">
-	Enter product name:<br>
-	<input type="text" name="proname1" required placeholder="enter productname"><br>
-	Enter product quantity:<br>
-	 <input type="number" name="quantity" id="quantity" list ="quantity"  required placeholder="enter quantity" min="1"><br>
-	Enter product price:<br>
-	<input type="number" name="amount" id="number" list ="amount"  required placeholder="enter amount" min="0"><br><br>
-	<button type="submit">Add Item</button>
+
+
+	<div class="container">
+
+		<h2>Add Item</h2>
+		<form action="additemservlet" method="post">
+			Enter product name<br> <input type="text" name="proname1"
+				required placeholder="enter productname"><br> Enter
+			product quantity<br> <input type="number" name="quantity"
+				id="quantity" list="quantity" required placeholder="enter quantity"
+				min="1"><br>
+		    Enter product price<br> <input
+				type="number" name="amount" id="number" list="amount" required
+				placeholder="enter amount" min="0"><br> <br>
+			<button type="submit">Add Item</button>
 	</div>
 	</form>
 </body>

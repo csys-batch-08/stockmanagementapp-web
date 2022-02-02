@@ -17,7 +17,7 @@ public class AdminInvoiceServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		
 	    HttpSession session=req.getSession();
 		InvoiceImpl impl=new InvoiceImpl();

@@ -5,10 +5,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>wallet recharge</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stock item</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -30,11 +32,11 @@ body {
 }
 
 .h1 {
-	background-color: red;
+	
 	position: absolute;
 	left: 10px;
-	top: 10px;
-	width: 100%;
+	top: 100px;
+	width: 100%
 }
 
 ul {
@@ -43,7 +45,11 @@ ul {
 	padding: 0;
 	overflow: hidden;
 	background-color: #333;
-	margin-top: 70px;
+	margin-top: -10px;
+}
+.ones
+{
+margin-left:50px;
 }
 
 li {
@@ -60,58 +66,62 @@ li a {
 
 li a:hover:not(.active) {
 	background-color: #111;
+	
 }
 
-.active {
-	background-color: #04AA6D;
-}
 
 table, th, td {
 	border: 1px solid black;
 	border-collapse: collapse;
 	padding: 20px;
 }
-</style>
-</head>
+.content{
+margin-top:150px;
 
+}
+</style>
+
+<body>
 
 
 	<div class="h1">
 		<center>
-			<h1>STOCK INVENTORY MANAGEMENT</h1>
+			<h1><u>STOCK INVENTORY MANAGEMENT</u></h1>
 		</center>
 	</div>
 	<br>
-<ul>
-        <li><a class="active" href="stockItemsUser">Stock Item</a></li>
-        <li><a class="active" href="usercart"> My Cart</a></li>
+	<ul>
+        <li><a  href="stockItemsUser">Stock Item</a></li>
+        <li><a  href="usercart"> My Cart</a></li>
      
-         <li><a class="active" href="userview">My Profile</a></li>
+         <li><a href="userview">My Profile</a></li>
         
       
-         <li style="float: right;"><a class="active" href="index.jsp">Logout</a></li>
-        <li style="float: right;"><a class="active" href="walletrecharge.jsp">Wallet</a></li>
-        <li><a  class="active" href = "userpurchaselist">My order List</a></li>
-           <li> <a  class="active"href = "userinvoice">  Invoice </a></li>
-             <li><a class="active" href="#help">Help</a></li>
+         <li style="float: right;"><a  href="index.jsp">Logout</a></li>
+        <li style="float: right;"><a  href="walletrecharge.jsp">Wallet</a></li>
+        <li><a  href = "userpurchaselist">My Order List</a></li>
+           <li> <a href = "userinvoice">  Invoice </a></li>
+             <li><a href="#help">Help</a></li>
         <br><br>
       </ul>
-          </head>
-<body>
 
+  	          </head>
+<body>
+<div class="content">
 		<center>
 	<form action="wallet" method="get">
-	Current wallet amount:${walletamount}<br><br> 
-	Enter recharge amount:<br>
+	Current wallet amount ${walletamount}<br><br> 
+	Enter recharge amount<br>
 	<input type="number" name="amount" id="number" list ="amount" autofocus required placeholder="enter amount" min="0"><br><br>
-	Enter your password:<br>
+	Enter your password<br>
 	<input type="password" name="password" id="password"><br><br>
 	
 	<button type="submit" class="btn btn-success">Wallet Recharge</button>
+		<a href="stockItemsusers.jsp" ><button class="btn btn-info">Cancel</button></a>
 	
 	</form><br><br>
-	
-	<a href="stockItemsusers.jsp" ><button class="btn btn-info">Cancel</button></a>
+	</div>
+
 </center>
 </body>
 </html>

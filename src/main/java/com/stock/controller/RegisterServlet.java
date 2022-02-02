@@ -23,7 +23,7 @@ public class RegisterServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("hello");
-		// TODO Auto-generated method stub
+		
 		String userName=request.getParameter("userName");
 		String address=request.getParameter("address");
 		String mail=request.getParameter("email");
@@ -44,7 +44,7 @@ public class RegisterServlet extends HttpServlet {
 			throw new EmailException();
 			}
 			catch (EmailException e) {
-				// TODO: handle exception
+				
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('This Email Already Used');");
 				out.println("location='register.jsp';");

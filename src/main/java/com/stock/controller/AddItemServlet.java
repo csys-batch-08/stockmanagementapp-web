@@ -15,7 +15,7 @@ import com.stock.model.Stock;
 public class AddItemServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		
 		String proname1=req.getParameter("proname1");
 		

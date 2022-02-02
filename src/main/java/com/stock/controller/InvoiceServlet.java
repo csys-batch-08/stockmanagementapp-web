@@ -27,7 +27,7 @@ public class InvoiceServlet extends HttpServlet {
 
     
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	Date deliverydate=null;
         HttpSession session=request.getSession();
@@ -49,12 +49,10 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
          
          response.sendRedirect("invoice.jsp");
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 	
 	}
 }
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
- */
+	
 }

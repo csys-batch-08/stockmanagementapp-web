@@ -42,58 +42,50 @@ public class PurchaseListServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		HttpSession session = request.getSession();	
-		PrintWriter out=response.getWriter();
+		HttpSession session = request.getSession();
+		PrintWriter out = response.getWriter();
 		int productid = Integer.parseInt(session.getAttribute("proid").toString());
-		System.out.println(productid);
 
 		int userid = Integer.parseInt(session.getAttribute("userid").toString());
-		System.out.println(userid);
 
 		String prodname = (session.getAttribute("productname").toString());
-		System.out.println(prodname);
+
 		int quantity = Integer.parseInt(session.getAttribute("proqty").toString());
-		System.out.println(quantity);
+
 		double totalprice = Double.parseDouble(session.getAttribute("price").toString());
-		System.out.println(totalprice);
-		
+
 		Purchase purchase = new Purchase(productid, userid, prodname, quantity, totalprice);
 
 		PuruchaseImpl pimpl = new PuruchaseImpl();
-		int i=pimpl.insert(purchase);
+		int i = pimpl.insert(purchase);
 		try {
-		if(i==5) {
-			
-			throw new InsufficientBalances();
-		
+			if (i == 5) {
+
+				throw new InsufficientBalances();
+
+			}
+
+			else {
+				Cart cart = new Cart(productid, userid);
+				CartImpl cimpl = new CartImpl();
+				cimpl.delete(cart);
+
+				List<Purchase> userpurchase = pimpl.userPurchase(userid);
+
+				session.setAttribute("userpurchase", userpurchase);
+
+			}
+
+			response.sendRedirect("userpurchaselist.jsp");
+
+		} catch (InsufficientBalances e) {
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('InsufficientBalances');");
+			out.println("location='purchase.jsp';");
+			out.println("</script>");
+
 		}
-		
-		else {
-			Cart cart = new Cart(productid, userid);
-			CartImpl cimpl = new CartImpl();
-			cimpl.delete(cart);
-			
-			List<Purchase> userpurchase = pimpl.userPurchase(userid);
-			
-			session.setAttribute("userpurchase", userpurchase);
-			
-		}
-
-		response.sendRedirect("userpurchaselist.jsp");
-
-	}catch( InsufficientBalances e) {
-		out.println("<script type=\"text/javascript\">");
-		out.println("alert('InsufficientBalances');");
-		out.println("location='purchase.jsp';");
-		out.println("</script>");
-
-	
-	}
-
-	
 
 	}
 }

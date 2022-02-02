@@ -15,18 +15,19 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <style>
-    .h1{
-        background-color: red;
-        position: absolute; left: 10px;top: 10px;
-        width: 100%;
-    }
-    ul {
+  .h1 {
+	
+	position: absolute;
+	left: 10px;
+	top: 100px;
+	width: 100%
+}  ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
   background-color: #333;
-  margin-top: 70px;
+  margin-top: -16px;
 }
 
 li {
@@ -68,29 +69,24 @@ body
 
     
     <div class="h1">
-        <center><h1>STOCK INVENTORY MANAGEMENT</h1></center>
+        <center><h1><u><i>STOCK INVENTORY MANAGEMENT</i></u></h1></center>
     </div>
     <br>
    <ul>
-        <li><a class="active" href="stockItemsUser">Stock Item</a></li>
-        <li><a class="active" href="usercart"> My Cart</a></li>
-     
-         <li><a class="active" href="userview">My Profile</a></li>
+       
         
       
-         <li style="float: right;"><a class="active" href="index.jsp">Logout</a></li>
-        <li style="float: right;"><a class="active" href="walletrecharge.jsp">Wallet</a></li>
-        <li><a  class="active" href = "userpurchaselist">My order List</a></li>
-           <li> <a  class="active"href = "userinvoice">  Invoice </a></li>
-             <li><a class="active" href="#help">Help</a></li>
-        <br><br>
+         <li style="float: right;"><a  href="index.jsp">Login</a></li>
+          <li style="float: right;"><a  href="register.jsp">Register</a></li>
+       
+       
       </ul>
        
       <div class="pass">
       <form action="forgetpassword" method="get">
-	Enter new password:<br>
+	Enter new password<br>
 	<input type="text" name="pass" id="pass" placeholder="Enter your new password" required><br>
-	Enter your mobilenumber:<br>
+	Enter your mobilenumber<br>
 	<input type="number" name="mobnum" id="mobnum" placeholder="Enter your mobile number" required><br><br>
 	
 	<button type="submit">change password</button>

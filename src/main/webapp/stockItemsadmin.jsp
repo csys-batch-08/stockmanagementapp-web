@@ -22,6 +22,7 @@ body {
     .topnav {
       overflow: hidden;
       background-color: #333;
+      margin-top:-150px;
     }
 
     .topnav a {
@@ -99,7 +100,8 @@ body {
     }
     .h1
     {
-    background-color:red;
+    background-color:#7c9ce5;
+     margin-top:100px;
     }
     table{
     margin-top:100px;
@@ -136,9 +138,9 @@ body {
      <table border=1 style="width:80%;margin-left:100px;">
           <tr>
             
-           	<th scope="col">ProductId</th>
-			<th scope="col">ProductName</th>
-			<th scope="col">ProductQuantity</th>
+           	<th scope="col">Product Id</th>
+			<th scope="col">Product Name</th>
+			<th scope="col">Product Quantity</th>
 			<th scope="col">Price</th>
 			<th>Update Quantity</th>
 		 	<th >Remove Product</th>

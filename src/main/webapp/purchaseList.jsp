@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
  <%@ page import="java.sql.ResultSet"
  import ="com.stock.impl.*" %>   
 <!DOCTYPE html>
@@ -11,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock item</title>
-  <style>
+<style>
 body {
       margin: 0;
       font-family: Arial;
@@ -22,6 +23,7 @@ body {
     .topnav {
       overflow: hidden;
       background-color: #333;
+      margin-top:-150px;
     }
 
     .topnav a {
@@ -99,7 +101,8 @@ body {
     }
     .h1
     {
-    background-color:red;
+    background-color:#7c9ce5;
+     margin-top:100px;
     }
     table{
     margin-top:100px;
@@ -112,8 +115,7 @@ body {
     <div class="h1">
         <center><h1 >STOCK INVENTORY MANAGEMENT</h1></center>
     </div>
-   
-     <div class="topnav" id="myTopnav">
+   <div class="topnav" id="myTopnav">
    <a href="stockItemsadmin" >Stock</a>
     <a href="adminuserview" >UserDetails</a>
     <a href="invoiceview" >Invoice</a>
@@ -133,17 +135,16 @@ body {
     <a href="Allpurchaselist">PurchaseList</a>
   
     </div>
-  
    
       <table border=1; style="width:90%;margin-left:100px; border-collapse:collapse ">
           <tr>
             
-            <th scope="col">OrderId</th>
-            <th scope="col">ProductId</th>
-            <th scope="col">UserId</th>
-             <th scope="col">ProductName</th>
-            <th scope="col">ProductQuantity</th>
-            <th scope="col">TotalPrice</th>
+            <th scope="col">Order Id</th>
+            <th scope="col">Product Id</th>
+            <th scope="col">User Id</th>
+             <th scope="col">Product Name</th>
+            <th scope="col">Product Quantity</th>
+            <th scope="col">Total Price</th>
             <th scope="col">Status</th>
             <th scope="col">Date</th>
              
@@ -153,6 +154,8 @@ body {
        
         
           <c:forEach items="${purchase}" var="purchaselist"> 
+        <fmt:parseDate pattern="yyyy-MM-dd" value="${purchaselist.orderDate}"
+				var="parsedOrderdDate" />
        
        
           <tr>
@@ -164,8 +167,8 @@ body {
             <td>${purchaselist.orderQty}</td>
             <td>${purchaselist.totalPrice}</td>
      	    <td>${purchaselist.status}</td>
-     	    <td>${purchaselist.orderDate}</td>
-           		
+     	    
+            <td><fmt:formatDate pattern="dd-MM-yyyy" value="${parsedOrderdDate}" /></td>
       
           </tr>
       </c:forEach>        

@@ -37,17 +37,17 @@
 
     <h1>Login</h1>
     <form action="login" method="post">
-      <label for="">Email :</label><br>
-      <input type="text" name="email"><br><br>
-      <label for="">Password :</label><br>
-      <input type="password" name="password"><br><br>
+      <label for="">Email </label><br>
+      <input type="text" name="email" placeholder="Enter your email"><br><br>
+      <label for="">Password </label><br>
+      <input type="password" name="password" placeholder="Enter your password"><br><br>
       <button type="submit">Submit</button><br>
       <a href="forgetpassword.jsp">Forgot Password</a><br>
       <a href="register.jsp">Register</a>
        
 
 
-
+</form>
 
      </div>
 </body>

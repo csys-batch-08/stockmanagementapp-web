@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>Admin Delete</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock item</title>
 <style>
 body {
       margin: 0;
@@ -16,6 +18,7 @@ body {
     .topnav {
       overflow: hidden;
       background-color: #333;
+      margin-top:-150px;
     }
 
     .topnav a {
@@ -93,14 +96,12 @@ body {
     }
     .h1
     {
-    background-color:red;
+    background-color:#7c9ce5;
+     margin-top:100px;
     }
-    .del{
+    table{
     margin-top:100px;
-    margin-left:600px;}
-    
-    
-    
+    margin-left:100px;}
 </style>
 </head>
 <body>
@@ -109,7 +110,7 @@ body {
     <div class="h1">
         <center><h1 >STOCK INVENTORY MANAGEMENT</h1></center>
     </div>
-  <div class="topnav" id="myTopnav">
+   <div class="topnav" id="myTopnav">
    <a href="stockItemsadmin" >Stock</a>
     <a href="adminuserview" >UserDetails</a>
     <a href="invoiceview" >Invoice</a>
@@ -129,6 +130,7 @@ body {
     <a href="Allpurchaselist">PurchaseList</a>
   
     </div>
+
   
     
     
@@ -138,7 +140,7 @@ body {
 <body>
 <div class="del">
 <form action="Deleteitemservlet" method="get">
-Enter Delete Product ID:<br>
+Enter Delete Product ID<br>
 	<input type="number" name="proid" id="proid"  value="${productId}"><br><br>
 	
 	<button type="submit">Delete Product</button>

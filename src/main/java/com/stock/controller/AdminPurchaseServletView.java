@@ -19,7 +19,7 @@ public class AdminPurchaseServletView extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		HttpSession session=req.getSession();
 		PuruchaseImpl pimpl =new PuruchaseImpl();
 		List<Purchase> purchaseList=pimpl.viewpurchase();

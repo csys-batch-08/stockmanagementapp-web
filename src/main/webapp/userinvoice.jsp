@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+	 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.sql.ResultSet" import="com.stock.impl.*"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,11 +31,11 @@ body {
 }
 
 .h1 {
-	background-color: red;
+	
 	position: absolute;
 	left: 10px;
-	top: 10px;
-	width: 100%;
+	top: 100px;
+	width: 100%
 }
 
 ul {
@@ -43,7 +44,11 @@ ul {
 	padding: 0;
 	overflow: hidden;
 	background-color: #333;
-	margin-top: 70px;
+	margin-top: -10px;
+}
+.ones
+{
+margin-left:50px;
 }
 
 li {
@@ -60,58 +65,64 @@ li a {
 
 li a:hover:not(.active) {
 	background-color: #111;
+	
 }
 
-.active {
-	background-color: #04AA6D;
-}
 
 table, th, td {
 	border: 1px solid black;
 	border-collapse: collapse;
 	padding: 20px;
+	margin-top:100px;
+}
+.search{
+margin-top:100px;
+margin-left:480px;
 }
 </style>
-</head>
+
 <body>
 
 
 	<div class="h1">
 		<center>
-			<h1>STOCK INVENTORY MANAGEMENT</h1>
+			<h1><u>STOCK INVENTORY MANAGEMENT</u></h1>
 		</center>
 	</div>
 	<br>
 	<ul>
-        <li><a class="active" href="stockItemsUser">Stock Item</a></li>
-        <li><a class="active" href="usercart"> My Cart</a></li>
+        <li><a  href="stockItemsUser">Stock Item</a></li>
+        <li><a  href="usercart"> My Cart</a></li>
      
-         <li><a class="active" href="userview">My Profile</a></li>
+         <li><a href="userview">My Profile</a></li>
         
       
-         <li style="float: right;"><a class="active" href="index.jsp">Logout</a></li>
-        <li style="float: right;"><a class="active" href="walletrecharge.jsp">Wallet</a></li>
-        <li><a  class="active" href = "userpurchaselist">My order List</a></li>
-           <li> <a  class="active"href = "userinvoice">  Invoice </a></li>
-             <li><a class="active" href="#help">Help</a></li>
+         <li style="float: right;"><a  href="index.jsp">Logout</a></li>
+        <li style="float: right;"><a  href="walletrecharge.jsp">Wallet</a></li>
+        <li><a  href = "userpurchaselist">My Order List</a></li>
+           <li> <a href = "userinvoice">  Invoice </a></li>
+             <li><a href="#help">Help</a></li>
         <br><br>
       </ul>
-      	
+
+  	
 	<br>
 	<table style="width: 80%; margin-left: 100px;">
 		<tr>
 
-			<th scope="col">ProductId</th>
-			<th scope="col">ProductName</th>
-			<th scope="col">ProductQuantity</th>
-			<th scope="col">Price</th>
-			<th scope="col">Choice</th>
+			<th scope="col">Product Id</th>
+			<th scope="col">Product Name</th>
+			<th scope="col">Product Quantity</th>
+			<th scope="col">Delivery Date</th>
+			<th scope="col">User Id</th>
 		</tr>
 
        
        <c:forEach items ="${userinvoiceview}" var="invoiceview">
             
-          
+        <fmt:parseDate pattern="yyyy-MM-dd" value="${invoiceview.deliveryDate}"
+				var="parsedeliveryDate" />
+         
          
         <tbody>
           <tr>
@@ -119,8 +130,9 @@ table, th, td {
             <td>${invoiceview.billId} </td>
             <td>${invoiceview.orderId}</td>
             <td>${invoiceview.status}</td>
-            <td>${invoiceview.deliveryDate}</td>
+            <td><fmt:formatDate pattern="dd-MM-yyyy" value="${parsedeliveryDate}" /></td>
             <td>${invoiceview.userId}</td>
+            
     </tr>
     </c:forEach>
       </table>

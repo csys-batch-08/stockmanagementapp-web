@@ -17,7 +17,7 @@ public class ProductDetailServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		
 		StockImpl stock =new StockImpl();
 		  String pName=req.getParameter("pname");

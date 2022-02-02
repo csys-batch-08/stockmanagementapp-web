@@ -17,7 +17,7 @@ public class AdminCartServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
         CartImpl cartImpl=new CartImpl();
 		
 		List<Cart> adminview=cartImpl.viewCart();

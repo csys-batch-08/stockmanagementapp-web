@@ -10,8 +10,33 @@ public class User {
 	private String password;
 	private long phoneNumber;
 	private double wallet;
+	private String role;
 	
 	
+	public User(int userId, String userName, String email, String address, long phoneNumber,
+			double wallet, String role) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.email = email;
+		this.address = address;
+		
+		this.phoneNumber = phoneNumber;
+		this.wallet = wallet;
+		this.role = role;
+	}
+
+
+	public String getRole() {
+		return role;
+	}
+
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+
 	public User(int userId) {
 		super();
 		this.userId = userId;
@@ -143,7 +168,7 @@ public class User {
 	}
 
 
-	public User(int userId, String userName, String email, String address, String password, long phoneNumber,
+	public User(int userId, String userName, String email, String address,  long phoneNumber,
 			double wallet) {
 		super();
 		this.userId = userId;

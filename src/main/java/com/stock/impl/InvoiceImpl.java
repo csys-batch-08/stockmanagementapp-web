@@ -3,6 +3,7 @@ package com.stock.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,35 +22,52 @@ public class InvoiceImpl implements InvoiceDao {
 		
 		List<Invoice> admininvoice=new ArrayList<Invoice>();
 		String invoiceQuery = "select bill_id,order_id,status,delivery_date,user_id from invoice";
-		Connection con;
+		Connection con=null;
 		ResultSet rs=null;
+		Statement stmt=null;
 		try {
 			con = ConnectionUtil.gbConnection();
-			Statement stmt = con.createStatement();
+			 stmt = con.createStatement();
 			rs = stmt.executeQuery(invoiceQuery);
 			while(rs.next()){
 				
-				Invoice invoice=new Invoice(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDate(4),rs.getInt(5));
+				Invoice invoice=new Invoice(rs.getInt("bill_id"), rs.getInt("order_id"), rs.getString("status"), rs.getDate("delivery_date"),rs.getInt("user_id"));
 				
 				admininvoice.add(invoice);
-		
-		
+				
 		} }catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
-		}
+		}finally {
+			
+			try {if(stmt!=null ) {
+			       stmt.close();}
+			if(rs!=null) {
+				
+				rs.close();
+			}
+			if(con!=null) {	
+					con.close();
+				}	}
+					
+				 catch (SQLException e) {
+					
+					e.printStackTrace();
+				}
+			}
+
 		
 		return admininvoice;
 	}
 	public void insert(Invoice invoice) {
 
 		String insertQuery = "insert into invoice (order_id,Delivery_date,user_id) values (?,?,?)";
-
+		PreparedStatement pstmt=null;
 		Connection con = null;
 		try {
 			con = ConnectionUtil.gbConnection();
-			PreparedStatement pstmt = con.prepareStatement(insertQuery);
-//			System.out.println(pro.getProductName() + pro.getQuantity() + pro.getUnitPrice());
+			 pstmt = con.prepareStatement(insertQuery);
+
 
 			
 			pstmt.setInt(1 ,invoice.getOrderId());
@@ -57,41 +75,71 @@ public class InvoiceImpl implements InvoiceDao {
 			pstmt.setInt(3, invoice.getUserId());
 			int i = pstmt.executeUpdate();
 			System.out.println(i + "inserted");
-			pstmt.close();
-			con.close();
+
 
 	} catch (Exception e) {
-		// TODO Auto-generated catch block
+		
 		e.printStackTrace();
-	}
+	}finally {
+		
+		try {if(pstmt!=null ) {
+		       pstmt.close();}
+		
+		if(con!=null) {	
+				con.close();
+			}	}
+				
+			 catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+		}
+
 	}
 	
 
 	public List<Invoice> showUserInvoice(int userid) {
 		List<Invoice> userinvoiceview=new ArrayList<Invoice>();
 		String userinvoice = "select bill_id,order_id,status,delivery_date,user_id from invoice  where user_id=?";
-		Connection con;
+		Connection con=null;
 		ResultSet rs=null;
+		PreparedStatement pstmt=null;
 		try {
 			con = ConnectionUtil.gbConnection();
-			PreparedStatement pstmt= con.prepareStatement(userinvoice);
+			 pstmt= con.prepareStatement(userinvoice);
 
 			pstmt.setInt(1, userid);
 			
 			rs = pstmt.executeQuery();
 while(rs.next()){
 				
-				Invoice invoice=new Invoice(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDate(4),rs.getInt(5));
+				Invoice invoice=new Invoice(rs.getInt("bill_id"), rs.getInt("order_id"), rs.getString("status"), rs.getDate("delivery_date"),rs.getInt("user_id"));
 				
 				userinvoiceview.add(invoice);
-		
-		
+				
 		}
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
-		}
+		}finally {
+			
+			try {if(pstmt!=null ) {
+			       pstmt.close();}
+			if(rs!=null) {
+				
+				rs.close();
+			}
+			if(con!=null) {	
+					con.close();
+				}	}
+					
+				 catch (SQLException e) {
+					
+					e.printStackTrace();
+				}
+			}
+
 		
 		return userinvoiceview;
 	}

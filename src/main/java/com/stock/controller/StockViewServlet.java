@@ -20,7 +20,7 @@ public class StockViewServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 	
 		StockImpl stock =new StockImpl();
 		List<Stock> productsList=stock.showProducts();
