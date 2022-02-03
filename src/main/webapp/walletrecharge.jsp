@@ -117,9 +117,10 @@ margin-top:150px;
 	<input type="password" name="password" id="password"><br><br>
 	
 	<button type="submit" class="btn btn-success">Wallet Recharge</button>
-		<a href="stockItemsusers.jsp" ><button class="btn btn-info">Cancel</button></a>
+
 	
 	</form><br><br>
+			<a href="stockItemsusers.jsp" ><button class="btn btn-info">Cancel</button></a>
 	</div>
 
 </center>

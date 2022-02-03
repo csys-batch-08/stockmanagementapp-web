@@ -82,7 +82,7 @@ public class PurchaseListServlet extends HttpServlet {
 		} catch (InsufficientBalances e) {
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('InsufficientBalances');");
-			out.println("location='purchase.jsp';");
+			out.println("location='walletrecharge.jsp';");
 			out.println("</script>");
 
 		}

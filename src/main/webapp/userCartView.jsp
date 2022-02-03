@@ -78,10 +78,7 @@ table, th, td {
 	padding: 20px;
 	margin-top:100px;
 }
-.search{
-margin-top:100px;
-margin-left:480px;
-}
+
 </style>
 
 <body>

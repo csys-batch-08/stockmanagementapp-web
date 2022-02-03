@@ -158,7 +158,7 @@ public List<Cart> allcart(int userid){
 			
 	public List<Cart> viewCart(){
 		List<Cart> adminCartView = new ArrayList<Cart>();
-		String viewquery="select cart_id,user_id,product_id,quantity,totalPrice,delivery_date from cart";
+		String viewquery="select cart_id,user_id,product_id,quantity,totalPrice,delivery_date from cart ORDER BY cart_id";
 		    Statement stmt=null;
 			Connection con = null;
 			ResultSet	rs =null;

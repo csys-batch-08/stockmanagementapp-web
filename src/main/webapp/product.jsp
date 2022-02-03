@@ -77,10 +77,6 @@ table, th, td {
 	border-collapse: collapse;
 	padding: 20px;
 }
-.search{
-margin-top:100px;
-margin-left:480px;
-}
 </style>
 
 <body>
