@@ -2,8 +2,7 @@ package com.stock.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.stock.exception.InsufficientBalances;
-import com.stock.exception.InsufficientQuantityException;
+
 import com.stock.impl.CartImpl;
 import com.stock.impl.PuruchaseImpl;
 import com.stock.model.Cart;
@@ -32,14 +31,11 @@ public class PurchaseListServlet extends HttpServlet {
 	 */
 	public PurchaseListServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -82,7 +78,7 @@ public class PurchaseListServlet extends HttpServlet {
 		} catch (InsufficientBalances e) {
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('InsufficientBalances');");
-			out.println("location='walletrecharge.jsp';");
+			out.println("location='walletRecharge.jsp';");
 			out.println("</script>");
 
 		}

@@ -38,11 +38,11 @@
     <h1>Login</h1>
     <form action="login" method="post">
       <label for="">Email </label><br>
-      <input type="text" name="email" placeholder="Enter your email"><br><br>
+      <input type="text" name="email" placeholder="Enter your email" required><br><br>
       <label for="">Password </label><br>
-      <input type="password" name="password" placeholder="Enter your password"><br><br>
+      <input type="password" name="password" placeholder="Enter your password" required><br><br>
       <button type="submit">Submit</button><br>
-      <a href="forgetpassword.jsp">Forgot Password</a><br>
+      <a href="forgetPassword.jsp">Forgot Password</a><br>
       <a href="register.jsp">Register</a>
        
 

@@ -1,8 +1,9 @@
 package com.stock.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Stock {
+public class Stock implements Serializable {
 
 	private int productId;
 	private String productName;
@@ -63,7 +64,7 @@ public class Stock {
 
 	public Stock() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Stock(double unitPrice, String productName) {

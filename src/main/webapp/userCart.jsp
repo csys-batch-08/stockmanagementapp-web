@@ -2,9 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-     <%@ page import="java.sql.ResultSet"
- import ="com.stock.impl.*" import = "javax.servlet.http.HttpSession" %>   
- 
+   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,11 +70,12 @@ li a:hover:not(.active) {
 
 
 table, th, td {
+margin-top:200px;
 	border: 1px solid black;
 	border-collapse: collapse;
 	padding: 20px;
-	margin-top:100px;
 }
+
 </style>
 
 <body>
@@ -96,45 +95,53 @@ table, th, td {
         
       
          <li style="float: right;"><a  href="index.jsp">Logout</a></li>
-        <li style="float: right;"><a  href="walletrecharge.jsp">Wallet</a></li>
+        <li style="float: right;"><a  href="walletRecharge.jsp">Wallet</a></li>
         <li><a  href = "userpurchaselist">My Order List</a></li>
            <li> <a href = "userinvoice">  Invoice </a></li>
              <li><a href="#help">Help</a></li>
         <br><br>
       </ul>
-             <table border=1; style="width:90%;margin-left:100px; border-collapse:collapse ">
-           <tr>
+      
+     <table style="width:80%;margin-left:100px;">
+          <tr>
             
+             <th scope="col">Cart Id</th>
             <th scope="col">User Id</th>
-            <th scope="col">User Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Address</th>
-            <th scope="col">Phone Number</th>
-            <th scope="col">Wallet Amount</th>
-  
-            
-            
-            
+             <th scope="col">Product Id</th>
+            <th scope="col">Product Quantity</th>
+            <th scope="col">Total Price</th>
+            <th scope="col">Date</th>
+           
+            <th>Purchase</th>
           </tr>
+      <c:forEach items="${usercartview}" var="userview"> 
        
-       
-      <c:forEach items="${userDetail}" var="userDetailsView"> 
-       
+        <fmt:parseDate pattern="yyyy-MM-dd" value="${userview.expectedDate}"
+				var="parsedExpectedDate" />
        
           <tr>
             
-            <td>${userDetailsView.userId}</td>
-            <td>${userDetailsView.userName}</td>
-            <td>${userDetailsView.email}</td>
-            <td>${userDetailsView.address}</td>
-            <td>${userDetailsView.phoneNumber}</td>
-     	    <td>${userDetailsView.wallet}</td>
-     	    
+            <td>${userview.cartId}</td>
+            <td>${userview.userId}</td>
+            <td>${userview.productId}</td>
+            <td>${userview.qunatity}</td>
+            <td>${userview.totalPrice}</td>
+            <td><fmt:formatDate pattern="dd-MM-yyyy" value="${parsedExpectedDate}" /></td>
             
+            <td><a href="purchase1?cartid=${userview.cartId}"><button type="button" class="btn btn-primary">Buy</button></a></td>
            		
       
+        <c:set var="cartid" value="${userview.cartId}" scope="session" />
+         <c:set var="userid" value="${userview.userId}" scope="session" />
+         <c:set var="proid" value="${userview.productId}" scope="session" />
+         <c:set var="proqty" value="${userview.qunatity}" scope="session" />
+        <c:set var="price" value="${userview.totalPrice}" scope="session" />
+        <c:set var="date" value="${userview.expectedDate}" scope="session" />
+      
+      
           </tr>
-      </c:forEach>    
+           
+     </c:forEach>
       </table>
 </body>
 </html>

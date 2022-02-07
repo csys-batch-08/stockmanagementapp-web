@@ -1,7 +1,7 @@
 package com.stock.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -26,7 +26,7 @@ public class StockViewServlet extends HttpServlet {
 		List<Stock> productsList=stock.showProducts();
 		req.setAttribute("products", productsList);
 		
-		RequestDispatcher rd= req.getRequestDispatcher("stockItemsadmin.jsp");
+		RequestDispatcher rd= req.getRequestDispatcher("stockItemsAdmin.jsp");
 		
 		rd.forward(req, resp);
 		

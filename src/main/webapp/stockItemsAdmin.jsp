@@ -2,8 +2,6 @@
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
     
- <%@ page import="java.sql.ResultSet"
- import ="com.stock.impl.*" %>   
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,7 +124,7 @@ body {
         <i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-content">
-        <a href="Additems.jsp">Add New Product</a>
+        <a href="addItem.jsp">Add New Product</a>
        
       </div>
     </div>
@@ -156,7 +154,7 @@ body {
           <tr>
             
             <td>${product.productId} </td>
-            <a><td>${product.productName}</td>
+            <td>${product.productName}</td>
             <td>${product.quantity}</td>
             <td>${product.unitPrice}</td>
             

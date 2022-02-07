@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.sql.ResultSet" import="com.stock.impl.*"%>
+	 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,10 +73,7 @@ table, th, td {
 	border: 1px solid black;
 	border-collapse: collapse;
 	padding: 20px;
-}
-.search{
-margin-top:100px;
-margin-left:480px;
+	margin-top:100px;
 }
 </style>
 
@@ -96,50 +94,42 @@ margin-left:480px;
         
       
          <li style="float: right;"><a  href="index.jsp">Logout</a></li>
-        <li style="float: right;"><a  href="walletrecharge.jsp">Wallet</a></li>
+        <li style="float: right;"><a  href="walletRecharge.jsp">Wallet</a></li>
         <li><a  href = "userpurchaselist">My Order List</a></li>
            <li> <a href = "userinvoice">  Invoice </a></li>
              <li><a href="#help">Help</a></li>
         <br><br>
       </ul>
-    <div class="search">
-      	<form action="searchitem" method="" class="ones">
-		<br> <input type="text" name="proname"
-			id="proname"placeholder="search Product"> 
 
-		<button type="submit">search</button>
-		</div>
-	</form>
-
+  	
 	<br>
-	<table style="width: 80%; margin-left: 100px;margin-top: 100px;">
-		<tr>
-
-			<th scope="col">Product Id</th>
-			<th scope="col">Product Name</th>
-			<th scope="col">Product Quantity</th>
-			<th scope="col">Price</th>
-			<th scope="col">Choice</th>
-		</tr>
-
-
-
-	 <c:forEach items ="${products}" var="product">
+	<table style="width: 80%; margin-left: 100px;">
+		 <tr>
+           <th scope="col">Bill Id</th>
+            <th scope="col">Order Id</th>
+            <th scope="col">Status</th>
+            <th scope="col"> Delivery Date</th>
+            <th scope="col">User Id</th>
+          </tr>
+       
+       
+       <c:forEach items ="${userinvoiceview}" var="invoiceview">
+            
+        <fmt:parseDate pattern="yyyy-MM-dd" value="${invoiceview.deliveryDate}"
+				var="parsedeliveryDate" />
+         
          
         <tbody>
           <tr>
             
-            <td>${product.productId} </td>
-            <td>${product.productName}</td>
-            <td>${product.quantity}</td>
-            <td>${product.unitPrice}</td>
-      
-				<td><a href="product?pname=${product.productName}">
-				
-				<button type="button" class="btn btn-primary">select</button></a></td>
-		</tr>
-		
-</c:forEach>
-	</table>
+            <td>${invoiceview.billId} </td>
+            <td>${invoiceview.orderId}</td>
+            <td>${invoiceview.status}</td>
+            <td><fmt:formatDate pattern="dd-MM-yyyy" value="${parsedeliveryDate}" /></td>
+            <td>${invoiceview.userId}</td>
+            
+    </tr>
+    </c:forEach>
+      </table>
 </body>
 </html>

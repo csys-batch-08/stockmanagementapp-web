@@ -20,7 +20,7 @@ public class UpdateProductServlet extends HttpServlet {
 		String name=req.getParameter("name");
 		HttpSession session=req.getSession();
 		session.setAttribute("productName", name);
-		resp.sendRedirect("updateitem.jsp");
+		resp.sendRedirect("updateItem.jsp");
 		
 	}
 	

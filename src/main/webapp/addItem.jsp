@@ -1,15 +1,12 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.sql.ResultSet" import="com.stock.impl.*"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock item</title>
+    <title>Add item</title>
 <style>
 body {
       margin: 0;
@@ -102,9 +99,14 @@ body {
     background-color:#7c9ce5;
      margin-top:100px;
     }
-    table{
-    margin-top:100px;
-    margin-left:100px;}
+    
+   .container{
+   
+     margin-top:150px;
+    margin-left:500px
+   
+   }
+    
 </style>
 </head>
 <body>
@@ -125,7 +127,7 @@ body {
         <i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-content">
-        <a href="Additems.jsp">Add New Product</a>
+        <a href="AddItems.jsp">Add New Product</a>
        
       </div>
     </div>
@@ -133,49 +135,22 @@ body {
     <a href="Allpurchaselist">PurchaseList</a>
   
     </div>
-	<table border=1;
-		style="width: 90%; margin-left: 100px; border-collapse: collapse">
-		<tr>
-
-			<th scope="col">User Id</th>
-			<th scope="col">User Name</th>
-			<th scope="col">Email</th>
-			<th scope="col">Address</th>
-			<th scope="col">Phone Number</th>
-			<th scope="col">Wallet Amount</th>
 
 
+	<div class="container">
 
-
-		</tr>
-
-
-
-		<c:forEach items="${adminUserDetail}" var="adminUserDetailsView">
-
-
-			<tr>
-
-				<td>${adminUserDetailsView.userId}</td>
-				<td>${adminUserDetailsView.userName}</td>
-				<td>${adminUserDetailsView.email}</td>
-				<td>${adminUserDetailsView.address}</td>
-				<td>${adminUserDetailsView.phoneNumber}</td>
-				<td>${adminUserDetailsView.wallet}</td>
-
-
-
-
-			</tr>
-		</c:forEach>
-
-
-	</table>
+		<h2>Add Item</h2>
+		<form action="additemservlet" method="post">
+			Enter product name<br> <input type="text" name="proname1"
+				required placeholder="enter productname"><br> Enter
+			product quantity<br> <input type="number" name="quantity"
+				id="quantity" list="quantity" required placeholder="enter quantity"
+				min="1"><br>
+		    Enter product price<br> <input
+				type="number" name="amount" id="number" list="amount" required
+				placeholder="enter amount" min="0"><br> <br>
+			<button type="submit">Add Item</button>
+	</div>
+	</form>
 </body>
 </html>
-
-
-
-
-
-

@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.stock.impl.InvoiceImpl;
-import com.stock.impl.PuruchaseImpl;
+
 import com.stock.model.Invoice;
-import com.stock.model.Purchase;
+
 @WebServlet("/userinvoice")
 public class UserInvoiceServlet extends HttpServlet {
 
@@ -29,7 +29,7 @@ public class UserInvoiceServlet extends HttpServlet {
 		List<Invoice> invoice=pimpl.showUserInvoice(userid);
 		session.setAttribute("userinvoiceview", invoice);
 		
-		RequestDispatcher rd= req.getRequestDispatcher("userinvoice.jsp");
+		RequestDispatcher rd= req.getRequestDispatcher("userInvoice.jsp");
 		
 		rd.forward(req, resp);
 

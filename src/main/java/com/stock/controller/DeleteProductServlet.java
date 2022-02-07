@@ -16,7 +16,7 @@ public class DeleteProductServlet extends HttpServlet {
 		String name=req.getParameter("proid");
 		HttpSession session=req.getSession();
 		session.setAttribute("productId", name);
-		resp.sendRedirect("deleteproduct.jsp");
+		resp.sendRedirect("deleteProduct.jsp");
 		
 	}
 	

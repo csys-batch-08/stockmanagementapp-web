@@ -122,7 +122,7 @@ body {
         <i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-content">
-        <a href="Additems.jsp">Add New Product</a>
+        <a href="addItems.jsp">Add New Product</a>
        
       </div>
     </div>
@@ -130,20 +130,18 @@ body {
     <a href="Allpurchaselist">PurchaseList</a>
   
     </div>
+ 
 
-  
-    
-    
-  
-  
-</head>
-<body>
-<div class="del">
-<form action="Deleteitemservlet" method="get">
-Enter Delete Product ID<br>
-	<input type="number" name="proid" id="proid"  value="${productId}"><br><br>
+<div class="con">
+<h2>product update</h2>
+<form action="updateitemservlet" method="get">
+	Enter product name<br>
+	<input type="text" name="proname" id="proname" value="${productName}" ><br>
+	Enter product quantity<br>
+	<input type="number" name="quantity" id="quantity" list ="quantity"  required placeholder="enter quantity" min="1"><br>
 	
-	<button type="submit">Delete Product</button>
+	
+	<button type="submit">update  quantity</button>
 	</div>
 </form>
 </body>

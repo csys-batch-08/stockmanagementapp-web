@@ -98,7 +98,7 @@ table, th, td {
         
       
          <li style="float: right;"><a  href="index.jsp">Logout</a></li>
-        <li style="float: right;"><a  href="walletrecharge.jsp">Wallet</a></li>
+        <li style="float: right;"><a  href="walletRecharge.jsp">Wallet</a></li>
         <li><a  href = "userpurchaselist">My Order List</a></li>
            <li> <a href = "userinvoice">  Invoice </a></li>
              <li><a href="#help">Help</a></li>
@@ -113,7 +113,7 @@ table, th, td {
             <th scope="col">Product Quantity</th>
             <th scope="col">Total Price</th>
             <th scope="col">Date</th>
-                     
+             <th>Purchase</th>        
             
           </tr>
        
@@ -132,7 +132,7 @@ table, th, td {
             <td>${userview.totalPrice}</td>
             <td><fmt:formatDate pattern="dd-MM-yyyy" value="${parsedExpectedDate}" /></td>
             
-     	    
+     	     <td><a href="purchase1?cartid=${userview.cartId}"><button type="button" class="btn btn-primary">Buy</button></a></td>
            		
       
           </tr>

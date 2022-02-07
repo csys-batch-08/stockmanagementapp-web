@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.stock.impl.PuruchaseImpl;
 import com.stock.model.Purchase;
-import com.stock.model.Stock;
+
 @WebServlet("/admin")
 public class AdminPurchaseServletView extends HttpServlet {
 
@@ -25,7 +25,7 @@ public class AdminPurchaseServletView extends HttpServlet {
 		List<Purchase> purchaseList=pimpl.viewpurchase();
 		session.setAttribute("purchase", purchaseList);
 		
-		RequestDispatcher rd= req.getRequestDispatcher("AdminPurchaseCheck.jsp");
+		RequestDispatcher rd= req.getRequestDispatcher("adminPurchaseCheck.jsp");
 		
 		rd.forward(req, resp);
 

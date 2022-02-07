@@ -1,9 +1,8 @@
-<%@page import="com.stock.impl.UserImpl"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="com.stock.impl.UserImpl.*"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+   
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+     
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,10 +73,7 @@ table, th, td {
 	border: 1px solid black;
 	border-collapse: collapse;
 	padding: 20px;
-}
-.content{
-margin-top:150px;
-
+	margin-top:100px;
 }
 </style>
 
@@ -98,31 +94,45 @@ margin-top:150px;
         
       
          <li style="float: right;"><a  href="index.jsp">Logout</a></li>
-        <li style="float: right;"><a  href="walletrecharge.jsp">Wallet</a></li>
+        <li style="float: right;"><a  href="walletRecharge.jsp">Wallet</a></li>
         <li><a  href = "userpurchaselist">My Order List</a></li>
            <li> <a href = "userinvoice">  Invoice </a></li>
              <li><a href="#help">Help</a></li>
         <br><br>
       </ul>
-
-  	          </head>
-<body>
-<div class="content">
-		<center>
-	<form action="wallet" method="get">
-	Current wallet amount ${walletamount}<br><br> 
-	Enter recharge amount<br>
-	<input type="number" name="amount" id="number" list ="amount" autofocus required placeholder="enter amount" min="0"><br><br>
-	Enter your password<br>
-	<input type="password" name="password" id="password"><br><br>
-	
-	<button type="submit" class="btn btn-success">Wallet Recharge</button>
-
-	
-	</form><br><br>
-			<a href="stockItemsusers.jsp" ><button class="btn btn-info">Cancel</button></a>
-	</div>
-
-</center>
+             <table border=1; style="width:90%;margin-left:100px; border-collapse:collapse ">
+           <tr>
+            
+            <th scope="col">User Id</th>
+            <th scope="col">User Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Address</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Wallet Amount</th>
+  
+            
+            
+            
+          </tr>
+       
+       
+      <c:forEach items="${userDetail}" var="userDetailsView"> 
+       
+       
+          <tr>
+            
+            <td>${userDetailsView.userId}</td>
+            <td>${userDetailsView.userName}</td>
+            <td>${userDetailsView.email}</td>
+            <td>${userDetailsView.address}</td>
+            <td>${userDetailsView.phoneNumber}</td>
+     	    <td>${userDetailsView.wallet}</td>
+     	    
+            
+           		
+      
+          </tr>
+      </c:forEach>    
+      </table>
 </body>
 </html>

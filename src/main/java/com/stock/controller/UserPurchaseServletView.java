@@ -28,7 +28,7 @@ public class UserPurchaseServletView extends HttpServlet {
 		
 		session.setAttribute("userpurchase", purchaseList);
 		
-		RequestDispatcher rd= req.getRequestDispatcher("userpurchaselist.jsp");
+		RequestDispatcher rd= req.getRequestDispatcher("userPurchaseList.jsp");
 		
 		rd.forward(req, resp);
 

@@ -22,8 +22,8 @@ public class AdminCartServlet extends HttpServlet {
 		
 		List<Cart> adminview=cartImpl.viewCart();
 		req.setAttribute("admincart", adminview);
-		System.out.println(adminview);
-		RequestDispatcher rd=req.getRequestDispatcher("Admincart.jsp");
+		
+		RequestDispatcher rd=req.getRequestDispatcher("adminCart.jsp");
 		
 		rd.forward(req, resp);
 

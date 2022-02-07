@@ -22,7 +22,7 @@ public class StockViewUser extends HttpServlet {
 		List<Stock> productsList=stock.showProducts();
 		req.setAttribute("products", productsList);
 		
-		RequestDispatcher rd= req.getRequestDispatcher("stockItemsusers.jsp");
+		RequestDispatcher rd= req.getRequestDispatcher("stockItemsUsers.jsp");
 		
 		rd.forward(req, resp);
 	

@@ -1,8 +1,9 @@
 package com.stock.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Invoice {
+public class Invoice implements Serializable{
 
 	private int billId;
 	private int orderId;

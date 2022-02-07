@@ -10,27 +10,32 @@ import javax.servlet.http.HttpServletResponse;
 import com.stock.impl.StockImpl;
 import com.stock.model.Stock;
 
-/**
- * Servlet implementation class DeleteItemServlet
- */
+
 @WebServlet("/Deleteitemservlet")
 
 public class DeleteItemServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+    	@Override
+    	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+	try {	
 		int productid=Integer.parseInt(request.getParameter("proid"));
 		
 		Stock stock=new Stock(productid);
 		StockImpl sdao=new StockImpl();
 		sdao.delete(stock);
-		response.sendRedirect("stockItemsadmin.jsp");
+		response.sendRedirect("stockItemsAdmin.jsp");
+	}
+	catch (IOException | NumberFormatException e ) {
+		e.printStackTrace();
+	}	
 		
+	
 		
 	}
 
 	
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		doGet(request, response);

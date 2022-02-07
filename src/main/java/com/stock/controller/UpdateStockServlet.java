@@ -22,9 +22,11 @@ public class UpdateStockServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
   
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session=request.getSession();
+		try {
 		String proname=request.getParameter("proname");
 		
 		int quantity=Integer.parseInt(request.getParameter("quantity"));
@@ -33,11 +35,15 @@ public class UpdateStockServlet extends HttpServlet {
 		
 		Stock stock=new Stock(proname,quantity);
 		StockImpl sdao=new StockImpl();
-		sdao.Adminupdated(stock);
+		sdao.adminupdate(stock);
 	
 		List<Stock> productsList=sdao.showProducts();
 		session.setAttribute("products", productsList);
-		response.sendRedirect("stockItemsadmin.jsp");
+		response.sendRedirect("stockItemsAdmin.jsp");
+		}catch (IOException | NumberFormatException e ) {
+			e.printStackTrace();
+		}	
+		
 	}
 
 

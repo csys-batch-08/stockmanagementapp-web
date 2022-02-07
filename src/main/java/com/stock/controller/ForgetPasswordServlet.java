@@ -1,6 +1,8 @@
 package com.stock.controller;
 
 import java.io.IOException;
+
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,30 +19,27 @@ import com.stock.model.User;
 public class ForgetPasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ForgetPasswordServlet() {
         super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    }
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String pass=request.getParameter("pass");
-		
+		try{
 		long mobnum=Long.parseLong(request.getParameter("mobnum"));
 		
 		User user=new User(pass,mobnum);
 		UserImpl uimpl=new UserImpl();
 		uimpl.updated(user);
-		
+		}catch ( NumberFormatException  e) {
+			e.printStackTrace();
+		}
 	}
 
 	
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		doGet(request, response);

@@ -1,8 +1,9 @@
 package com.stock.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Purchase {
+public class Purchase implements Serializable {
 	private int cartId;
 	private int productId;
 	private int userId;
@@ -79,7 +80,6 @@ public class Purchase {
 	}
 	public Purchase() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Purchase(int productId, int userId, String productName, int orderQty, double totalPrice) {
 		super();

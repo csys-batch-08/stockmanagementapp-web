@@ -25,7 +25,7 @@ public class AdminUserDetailsServlet extends HttpServlet {
 		UserImpl userImpl =new UserImpl();
 		List<User> adminuserDetails=userImpl.showuser();
 		session.setAttribute("adminUserDetail", adminuserDetails);
-        RequestDispatcher rd= req.getRequestDispatcher("adminuserview.jsp");
+        RequestDispatcher rd= req.getRequestDispatcher("adminUserView.jsp");
 		
 		rd.forward(req, resp);
 	

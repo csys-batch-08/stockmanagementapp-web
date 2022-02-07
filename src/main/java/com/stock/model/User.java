@@ -109,7 +109,6 @@ public class User {
 	}
 	public User() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public User(String userName, String email, String password) {
@@ -134,7 +133,7 @@ public class User {
 		this.password = password;
 	}
 	public User(int userId, String userName, String emailid, String password) {
-		// TODO Auto-generated constructor stub
+
 		this.userId=userId;
 		this.userName=userName;
 		this.email=emailid;

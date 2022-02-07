@@ -1,8 +1,9 @@
+   
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-	 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-	 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="java.sql.ResultSet" import="com.stock.impl.*"%>
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,7 +74,7 @@ table, th, td {
 	border: 1px solid black;
 	border-collapse: collapse;
 	padding: 20px;
-	margin-top:100px;
+	margin-top:150px;
 }
 </style>
 
@@ -94,43 +95,47 @@ table, th, td {
         
       
          <li style="float: right;"><a  href="index.jsp">Logout</a></li>
-        <li style="float: right;"><a  href="walletrecharge.jsp">Wallet</a></li>
+        <li style="float: right;"><a  href="walletRecharge.jsp">Wallet</a></li>
         <li><a  href = "userpurchaselist">My Order List</a></li>
            <li> <a href = "userinvoice">  Invoice </a></li>
              <li><a href="#help">Help</a></li>
         <br><br>
       </ul>
-
-  	
-	<br>
-	<table style="width: 80%; margin-left: 100px;">
-		<tr>
-
-			<th scope="col">Product Id</th>
-			<th scope="col">Product Name</th>
-			<th scope="col">Product Quantity</th>
-			<th scope="col">Delivery Date</th>
-			<th scope="col">User Id</th>
-		</tr>
-
-       
-       <c:forEach items ="${userinvoiceview}" var="invoiceview">
-            
-        <fmt:parseDate pattern="yyyy-MM-dd" value="${invoiceview.deliveryDate}"
-				var="parsedeliveryDate" />
-         
-         
-        <tbody>
+          <table style="width:80%;margin-left:100px;">
           <tr>
             
-            <td>${invoiceview.billId} </td>
-            <td>${invoiceview.orderId}</td>
-            <td>${invoiceview.status}</td>
-            <td><fmt:formatDate pattern="dd-MM-yyyy" value="${parsedeliveryDate}" /></td>
-            <td>${invoiceview.userId}</td>
+             <th scope="col">Order Id</th>
+            <th scope="col">Product Id</th>
+            <th scope="col">User Id</th>
+             <th scope="col">Product Name</th>
+            <th scope="col">Product Quantity</th>
+            <th scope="col">Total Price</th>
+            <th scope="col">Status</th>
+            <th scope="col">Date</th>
+           
+          </tr>
+       
+       
+          <c:forEach items="${userpurchase}" var="userpurchase"> 
+        <fmt:parseDate pattern="yyyy-MM-dd" value="${userpurchase.orderDate}"
+				var="parsedOrderdDate" />
+       
+       
+          <tr>
             
-    </tr>
-    </c:forEach>
+            <td>${userpurchase.cartId}</td>
+            <td>${userpurchase.productId}</td>
+            <td>${userpurchase.userId}</td>
+             <td>${userpurchase.productName}</td>
+            <td>${userpurchase.orderQty}</td>
+            <td>${userpurchase.totalPrice}</td>
+     	    <td>${userpurchase.status}</td>
+     	    
+           	<td><fmt:formatDate pattern="dd-MM-yyyy" value="${parsedOrderdDate}" /></td>	
+      
+          </tr>
+      </c:forEach>    
+     
       </table>
 </body>
 </html>

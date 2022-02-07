@@ -2,8 +2,7 @@ package com.stock.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,12 +15,11 @@ import com.stock.exception.InvalidUserException;
 import com.stock.impl.UserImpl;
 import com.stock.model.User;
 
-/**
- * Servlet implementation class LoginServlet
- */
+
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

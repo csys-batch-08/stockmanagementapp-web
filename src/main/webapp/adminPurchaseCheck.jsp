@@ -1,5 +1,11 @@
+   
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+ <%@ page import="java.sql.ResultSet"
+ import ="com.stock.impl.*" %>   
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -122,7 +128,7 @@ body {
         <i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-content">
-        <a href="Additems.jsp">Add New Product</a>
+        <a href="addItems.jsp">Add New Product</a>
        
       </div>
     </div>
@@ -130,19 +136,57 @@ body {
     <a href="Allpurchaselist">PurchaseList</a>
   
     </div>
- 
-
-<div class="con">
-<h2>product update</h2>
-<form action="updateitemservlet" method="get">
-	Enter product name<br>
-	<input type="text" name="proname" id="proname" value="${productName}" ><br>
-	Enter product quantity<br>
-	<input type="number" name="quantity" id="quantity" list ="quantity"  required placeholder="enter quantity" min="1"><br>
-	
-	
-	<button type="submit">update  quantity</button>
-	</div>
-</form>
+   
+      <table border=1; style="width:90%;margin-left:100px; border-collapse:collapse ">
+          <tr>
+            
+            <th scope="col">Order Id</th>
+            <th scope="col">Product Id</th>
+            <th scope="col">User Id</th>
+             <th scope="col">Product Name</th>
+            <th scope="col">Product Quantity</th>
+            <th scope="col">Total Price</th>
+            <th scope="col">Status</th>
+            <th scope="col">Date</th>
+              <th scope="col">Delivery Date</th>
+            
+          </tr>
+       
+       
+        
+          <c:forEach items="${purchase}" var="purchaselist"> 
+        <fmt:parseDate pattern="yyyy-MM-dd" value="${purchaselist.orderDate}"
+				var="parsedOrderdDate" />
+       
+       
+          <tr>
+            
+            <td>${purchaselist.cartId}</td>
+            <td>${purchaselist.productId}</td>
+            <td>${purchaselist.userId}</td>
+             <td>${purchaselist.productName}</td>
+            <td>${purchaselist.orderQty}</td>
+            <td>${purchaselist.totalPrice}</td>
+     	    <td>${purchaselist.status}</td>
+     	    <td><fmt:formatDate pattern="dd-MM-yyyy" value="${parsedOrderdDate}" /></td>
+           		
+         <td>     
+              <form action="invoice">
+        <input type="Date" name="deliveryDate" id="deliveryDate"   autofocus required placeholder="delivery no of days"  ><br><br>
+              <button type="submit">Submit</button>
+              
+              </form></td>
+              <c:set var="orderid" value="${purchaselist.cartId}" scope="session" />
+              <c:set var="userid" value="${purchaselist.userId}" scope="session" />
+      
+          </tr>
+      </c:forEach>        
+              
+             
+       
+      </table>
 </body>
-</html>
+<script type="text/javascript">
+		let today = new Date().toISOString().slice(0, 10);
+		document.getElementById("deliveryDate").min =today;
+	</script></html>

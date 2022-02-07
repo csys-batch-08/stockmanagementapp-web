@@ -1,7 +1,7 @@
 package com.stock.controller;
 
 import java.io.IOException;
-import java.util.List;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.stock.impl.CartImpl;
-import com.stock.impl.StockImpl;
-import com.stock.model.Stock;
 
 @WebServlet("/purchase1")
 public class PurchaseDetailServlet extends HttpServlet {
@@ -21,8 +18,8 @@ public class PurchaseDetailServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		CartImpl stock = new CartImpl();
-		String cartId = req.getParameter("cartid");
+		
+		
 		
 		HttpSession session = req.getSession();
 		int userid = Integer.parseInt(session.getAttribute("userid").toString());

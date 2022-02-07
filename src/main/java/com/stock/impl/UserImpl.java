@@ -3,198 +3,139 @@ package com.stock.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import com.stock.dao.UserDao;
-import com.stock.model.Cart;
-import com.stock.model.Stock;
+import com.stock.logger.Logger;
 import com.stock.model.User;
 import com.stock.util.ConnectionUtil;
 
 public class UserImpl implements UserDao {
 
-	public int insert(User users) {
-		Connection con =null;
+	private static final String WALLET = "wallet";
+	private static final String USER_NAME = "user_name";
+	private static final String USER_ID = "user_id";
+	private static final String PHONENUMBER = "phonenumber";
+	private static final String EMAIL = "email";
+	private static final String ADDRESS = "address";
+
+	public int insert(User user) {
+		Connection con = null;
 		PreparedStatement pstmt = null;
-		int i = 0;
-		
+		int rows = 0;
+
 		try {
 			con = ConnectionUtil.gbConnection();
 			String query = "insert into users(user_name,email,address,password,phonenumber)values(?,?,?,?,?)";
 
-		
-
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, users.getUserName());
-			pstmt.setString(2, users.getEmail());
-			pstmt.setString(3, users.getAddress());
-			pstmt.setString(4, users.getPassword());
-			pstmt.setLong(5, users.getPhoneNumber());
-			i = pstmt.executeUpdate();
-			System.out.println("Register success");
-			
-			
-		} catch (ClassNotFoundException e) {
-			
-			e.printStackTrace();
-		} catch (SQLException e) {
-			
+			pstmt.setString(1, user.getUserName());
+			pstmt.setString(2, user.getEmail());
+			pstmt.setString(3, user.getAddress());
+			pstmt.setString(4, user.getPassword());
+			pstmt.setLong(5, user.getPhoneNumber());
+			rows = pstmt.executeUpdate();
 
-			e.printStackTrace();
-	}
-		finally {
-			try {if(pstmt!=null ) {
-			       pstmt.close();}
-			
-				if(con!=null) {	
-					con.close();
-				}	}
-					
-				 catch (SQLException e) {
-					
-					e.printStackTrace();
-				}
-			}
-		return i;
+		} catch (Exception e) {
+
+			Logger.printStackTrace(e);
+			Logger.runTimeException(e.getMessage());
+
+		} finally {
+
+			ConnectionUtil.close(null, pstmt, con);
 		}
-
-	
-
-	
+		return rows;
+	}
 
 	public User validateUser(User us) {
-		User user = null;
-		User userlog =null;
+
+		User userlog = null;
 		Connection con = null;
 		ResultSet rs = null;
-		PreparedStatement pre=null;
-		try {
+		PreparedStatement pre = null;
 
-			
-			try {
-				con = ConnectionUtil.gbConnection();
-			} catch (ClassNotFoundException e) {
-			
-				e.printStackTrace();
-			}
-			
+		try {
+			con = ConnectionUtil.gbConnection();
+
 			String query = "select user_id,user_name,email,address,password,phonenumber,usertype,wallet from users where email=? and password=?";
 
-			 pre = con.prepareStatement(query);
-			pre.setString(1,us.getEmail() );
-			pre.setString(2,us.getPassword() );
+			pre = con.prepareStatement(query);
+			pre.setString(1, us.getEmail());
+			pre.setString(2, us.getPassword());
 			rs = pre.executeQuery();
-			while (rs.next()) {
+			if (rs.next()) {
 
-			 userlog = new User(rs.getInt("user_id"), rs.getString("user_name"), rs.getString("email"), rs.getString("address"), rs.getLong("phonenumber"),
-						rs.getDouble("wallet"),rs.getString("usertype"));
-				
+				userlog = new User(rs.getInt(USER_ID), rs.getString(USER_NAME), rs.getString(EMAIL),
+						rs.getString(ADDRESS), rs.getLong(PHONENUMBER), rs.getDouble(WALLET),
+						rs.getString("usertype"));
+
 			}
 
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			
-		}finally {
-			
-				try {if(pre!=null ) {
-				       pre.close();}
-				if(rs!=null) {
-					
-					rs.close();
-				}
-				if(con!=null) {	
-						con.close();
-					}	}
-						
-					 catch (SQLException e) {
-						
-						e.printStackTrace();
-					}
-				}
+		} catch (Exception e) {
 
-		
+			Logger.printStackTrace(e);
+			Logger.runTimeException(e.getMessage());
+
+		} finally {
+
+			ConnectionUtil.close(rs, pre, con);
+		}
+
 		return userlog;
 	}
 
 	public void updated(User userupdate) {
 
 		String updateQuery = "update users set  password=? where phonenumber=?";
-		PreparedStatement pstmt=null;
-		Connection con=null;
+		PreparedStatement pstmt = null;
+		Connection con = null;
+		
 		try {
 			con = ConnectionUtil.gbConnection();
-			 pstmt = con.prepareStatement(updateQuery);
+			pstmt = con.prepareStatement(updateQuery);
 
 			pstmt.setString(1, userupdate.getPassword());
 			pstmt.setLong(2, userupdate.getPhoneNumber());
-			int i = pstmt.executeUpdate();
-			System.out.println(i + "updated");
-			
-					} catch (ClassNotFoundException e) {
-			
-			e.printStackTrace();
-		} catch (SQLException e) {
-		
-			e.printStackTrace();
-		}finally {
-			try {if(pstmt!=null ) {
-			       pstmt.close();}
-			
-				if(con!=null) {	
-					con.close();
-				}	}
-					
-				 catch (SQLException e) {
-					
-					e.printStackTrace();
-				}
-			}
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+
+			Logger.printStackTrace(e);
+			Logger.runTimeException(e.getMessage());
+
+		} finally {
+
+			ConnectionUtil.close(null, pstmt, con);
+		}
 
 	}
 
-	
 	public void wallet(User userwallet) {
 
 		String updatewallet = "update users set  WALLET=wallet + ? where password=?";
-		PreparedStatement pstmt=null;
-		Connection con=null;
+		PreparedStatement pstmt = null;
+		Connection con = null;
+		
 		try {
 			con = ConnectionUtil.gbConnection();
-			 pstmt = con.prepareStatement(updatewallet);
+			pstmt = con.prepareStatement(updatewallet);
 
 			pstmt.setDouble(1, userwallet.getWallet());
 			pstmt.setString(2, userwallet.getPassword());
-			int i = pstmt.executeUpdate();
-			pstmt.executeUpdate("commit");
-			
-			
-		} catch (ClassNotFoundException e) {
-			
-			e.printStackTrace();
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}finally {
-			try {if(pstmt!=null ) {
-			       pstmt.close();}
-			
-				if(con!=null) {	
-					con.close();
-				}	}
-					
-				 catch (SQLException e) {
-					
-					e.printStackTrace();
-				}
-			}
+		    pstmt.executeUpdate();
 
-		
+		} catch (Exception e) {
+
+			Logger.printStackTrace(e);
+			Logger.runTimeException(e.getMessage());
+
+		} finally {
+
+			ConnectionUtil.close(null, pstmt, con);
+		}
 
 	}
 
@@ -202,58 +143,37 @@ public class UserImpl implements UserDao {
 
 		String updatewallet = "select wallet from users where user_id=?";
 		User user = null;
-		ResultSet rs=null;
-		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
 		Connection con = null;
-			try {
-				con = ConnectionUtil.gbConnection();
-				pstmt = con.prepareStatement(updatewallet);
-				 pstmt.setInt(1, userid);
-				 rs = pstmt.executeQuery();
-					while (rs.next()) {
+		try {
+			con = ConnectionUtil.gbConnection();
+			pstmt = con.prepareStatement(updatewallet);
+			pstmt.setInt(1, userid);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
 
-						user = new User(rs.getDouble("wallet"));
-						}
-
-			} catch (ClassNotFoundException e) {
-				
-				e.printStackTrace();
+				user = new User(rs.getDouble(WALLET));
 			}
-			catch (SQLException e) {
-				
-				e.printStackTrace();
-			}finally {
-				
-				try {if(pstmt!=null ) {
-				       pstmt.close();}
-				if(rs!=null) {
-					
-					rs.close();
-				}
-				if(con!=null) {	
-						con.close();
-					}	}
-						
-					 catch (SQLException e) {
-						
-						e.printStackTrace();
-					}
-				}
 
-			return user;
+		} catch (Exception e) {
+
+			Logger.printStackTrace(e);
+			Logger.runTimeException(e.getMessage());
+
+		} finally {
+
+			ConnectionUtil.close(rs, pstmt, con);
+		}
+
+		return user;
 	}
 
-			 	
-		 
-		
-           	
-	
-
 	public List<User> showuser() {
-		List<User> adminuserview = new ArrayList<User>();
-		Connection con=null;
+		List<User> adminuserview = new ArrayList<>();
+		Connection con = null;
 		ResultSet rs = null;
-		Statement stmt=null;
+		PreparedStatement pstmt = null;
 
 		String showquery = "select user_id,user_name,email,address,phonenumber,wallet from users where usertype='user'";
 
@@ -261,85 +181,60 @@ public class UserImpl implements UserDao {
 
 			con = ConnectionUtil.gbConnection();
 
-			 stmt = con.createStatement();
-			rs = stmt.executeQuery(showquery);
+			pstmt = con.prepareStatement(showquery);
+			rs = pstmt.executeQuery();
 			while (rs.next()) {
 
-				User user = new User(rs.getInt("user_id"), rs.getString("user_name"), rs.getString("email"), rs.getString("address"), rs.getLong("phonenumber"),
-						rs.getDouble("wallet"));
+				User user = new User(rs.getInt(USER_ID), rs.getString(USER_NAME), rs.getString(EMAIL),
+						rs.getString(ADDRESS), rs.getLong(PHONENUMBER), rs.getDouble(WALLET));
 				adminuserview.add(user);
-				
-				
+
 			}
 
 		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}finally {
-			
-			try {if(stmt!=null ) {
-			       stmt.close();}
-			if(rs!=null) {
-				
-				rs.close();
-			}
-			if(con!=null) {	
-					con.close();
-				}	}
-					
-				 catch (SQLException e) {
-					
-					e.printStackTrace();
-				}
-			}
 
+			Logger.printStackTrace(e);
+			Logger.runTimeException(e.getMessage());
+
+		} finally {
+
+			ConnectionUtil.close(rs, pstmt, con);
+		}
 
 		return adminuserview;
 
 	}
 
 	public List<User> userview(int userid) {
-		List<User> userDetails = new ArrayList<User>();
-		Connection con=null;
+		List<User> userDetails = new ArrayList<>();
+		Connection con = null;
 		ResultSet rs = null;
-		PreparedStatement pstmt=null;
+		PreparedStatement pstmt = null;
 		String usershow = "select user_id,user_name,email,address,phonenumber,wallet from users where user_id=?";
 		try {
 
 			con = ConnectionUtil.gbConnection();
 
-			 pstmt = con.prepareStatement(usershow);
+			pstmt = con.prepareStatement(usershow);
 			pstmt.setInt(1, userid);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 
-				User user = new User(rs.getInt("user_id"), rs.getString("user_name"), rs.getString("email"), rs.getString("address"), rs.getLong("phonenumber"),
-						rs.getDouble("wallet"));
+				User user = new User(rs.getInt(USER_ID), rs.getString(USER_NAME), rs.getString(EMAIL),
+						rs.getString(ADDRESS), rs.getLong(PHONENUMBER), rs.getDouble(WALLET));
 				userDetails.add(user);
-				
-						}
+
+			}
 
 		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}finally {
-			
-			try {if(pstmt!=null ) {
-			       pstmt.close();}
-			if(rs!=null) {
-				
-				rs.close();
-			}
-			if(con!=null) {	
-					con.close();
-				}	}
-					
-				 catch (SQLException e) {
-					
-					e.printStackTrace();
-				}
-			}
 
+			Logger.printStackTrace(e);
+			Logger.runTimeException(e.getMessage());
+
+		} finally {
+
+			ConnectionUtil.close(rs, pstmt, con);
+		}
 
 		return userDetails;
 

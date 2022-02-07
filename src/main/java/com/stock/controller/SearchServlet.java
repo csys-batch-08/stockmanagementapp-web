@@ -24,7 +24,7 @@ public class SearchServlet extends HttpServlet {
 		List<Stock> searchList=stock.serachProduct(productName);
 		req.setAttribute("products", searchList);
 		
-		RequestDispatcher rd= req.getRequestDispatcher("stockItemsusers.jsp");
+		RequestDispatcher rd= req.getRequestDispatcher("stockItemsUsers.jsp");
 		
 		rd.forward(req, resp);
 		

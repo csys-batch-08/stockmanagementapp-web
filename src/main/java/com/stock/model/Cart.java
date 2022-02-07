@@ -1,8 +1,9 @@
 package com.stock.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Cart {
+public class Cart implements Serializable{
 private int cartId;
 private int userId;
 private int productId;

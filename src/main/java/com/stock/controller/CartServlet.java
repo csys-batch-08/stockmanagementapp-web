@@ -19,21 +19,22 @@ import com.stock.exception.InsufficientQuantityException;
 import com.stock.impl.CartImpl;
 import com.stock.impl.StockImpl;
 import com.stock.model.Cart;
-import com.stock.model.Stock;
+
 @WebServlet("/cart")
 public class CartServlet extends HttpServlet {
 	@Override
-	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session=req.getSession();
-		PrintWriter out=resp.getWriter();
+	public void doPost(HttpServletRequest req, HttpServletResponse resp)  {
+		PrintWriter out=null;
+	 
+		try {	
+			out=resp.getWriter();
+	    HttpSession session=req.getSession();
+		
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		 Date dt=null;
-		try {
+		
 			dt = sdf.parse(req.getParameter("date"));
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		
 		int userid=Integer.parseInt(session.getAttribute("userid").toString());
 		
 		int productid=Integer.parseInt (session.getAttribute("productid").toString());
@@ -43,12 +44,12 @@ public class CartServlet extends HttpServlet {
 		
 		double price=Double.parseDouble(session.getAttribute("unitprice").toString());
 		
-//		int days=Integer.parseInt(req.getParameter("date"));
+
 
 		Cart cart=new Cart(userid,productid,quantity,price,dt);
 		
 		CartImpl ci=new CartImpl();
-		try {
+		
 			if(currentqty>quantity) {
 				
 				ci.insert(cart);
@@ -62,7 +63,7 @@ public class CartServlet extends HttpServlet {
 				session.setAttribute("usercartview", userview);
 				
 			
-				RequestDispatcher rd = req.getRequestDispatcher("usercart.jsp");
+				RequestDispatcher rd = req.getRequestDispatcher("userCart.jsp");
 				
 				rd.forward(req, resp);
 				
@@ -84,8 +85,11 @@ public class CartServlet extends HttpServlet {
 			
 			
 			
-		}
-		
-		
+		} catch (ParseException  e1) {
+			e1.printStackTrace();
+		} catch (IOException | ServletException e) {
+			
+			e.printStackTrace();
+		} 		
 	}
 }

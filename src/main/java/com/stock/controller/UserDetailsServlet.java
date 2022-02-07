@@ -26,7 +26,7 @@ public class UserDetailsServlet extends HttpServlet {
 		UserImpl userImpl =new UserImpl();
 		List<User> userDetails=userImpl.userview(userid);
 		session.setAttribute("userDetail", userDetails);
-        RequestDispatcher rd= req.getRequestDispatcher("userview.jsp");
+        RequestDispatcher rd= req.getRequestDispatcher("userView.jsp");
 		
 		rd.forward(req, resp);
 	
