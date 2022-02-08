@@ -16,7 +16,7 @@ import com.stock.model.User;
 @WebServlet("/userview")
 public class UserDetailsServlet extends HttpServlet {
 
-	
+	private static final long serialVersionUID = 1L;
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	

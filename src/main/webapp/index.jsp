@@ -44,8 +44,6 @@
       <button type="submit">Submit</button><br>
       <a href="forgetPassword.jsp">Forgot Password</a><br>
       <a href="register.jsp">Register</a>
-       
-
 
 </form>
 

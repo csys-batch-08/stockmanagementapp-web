@@ -17,7 +17,7 @@ import com.stock.model.Invoice;
 
 @WebServlet("/userinvoice")
 public class UserInvoiceServlet extends HttpServlet {
-
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -86,7 +86,7 @@ public class PuruchaseImpl implements PurchaseDao {
 				}
 			}
 
-			catch (SQLException e) {
+			catch (SQLException | NumberFormatException e) {
 
 				e.printStackTrace();
 			}

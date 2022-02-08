@@ -1,8 +1,9 @@
 package com.stock.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class User {
+public class User implements Serializable{
 	private int userId; 
 	private String userName;
 	private String email;
@@ -174,7 +175,7 @@ public class User {
 		this.userName = userName;
 		this.email = email;
 		this.address = address;
-		this.password = password;
+		
 		this.phoneNumber = phoneNumber;
 		this.wallet = wallet;
 	}

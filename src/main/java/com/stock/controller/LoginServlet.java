@@ -13,20 +13,20 @@ import javax.servlet.http.HttpSession;
 
 import com.stock.exception.InvalidUserException;
 import com.stock.impl.UserImpl;
+import com.stock.logger.Logger;
 import com.stock.model.User;
 
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-
+	private static final long serialVersionUID = 1L;
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		PrintWriter out = response.getWriter();
-
 		
+
 		String mail = request.getParameter("email");
 		String pass = request.getParameter("password");
 		
@@ -50,12 +50,20 @@ public class LoginServlet extends HttpServlet {
 				throw new InvalidUserException();
 			}
 		} catch (InvalidUserException e) {
-
+			try {
+			PrintWriter out = response.getWriter();
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('Invalid email id or password');");
 			out.println("location='index.jsp';");
 			out.println("</script>");
-
+			}
+			catch(IOException er) {
+				Logger.printStackTrace(er);
+				Logger.runTimeException(er.getMessage());
+			}
+		}catch(IOException e) {
+			Logger.printStackTrace(e);
+			Logger.runTimeException(e.getMessage());
 		}
 
 	}

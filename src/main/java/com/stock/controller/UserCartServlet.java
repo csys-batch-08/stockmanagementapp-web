@@ -15,7 +15,7 @@ import com.stock.impl.CartImpl;
 import com.stock.model.Cart;
 @WebServlet("/usercart")
 public class UserCartServlet extends HttpServlet {
-
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -12,20 +12,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stock item</title>
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	crossorigin="anonymous"></script>
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <style>
 body {
 	background: linear-gradient(lightblue, lightgreen);
@@ -68,8 +60,9 @@ li a:hover:not(.active) {
 	background-color: #111;
 	
 }
-
-
+table{
+width:80%;
+margin-left:100px;}
 table, th, td {
 	border: 1px solid black;
 	border-collapse: collapse;
@@ -82,9 +75,8 @@ table, th, td {
 
 
 	<div class="h1">
-		<center>
-			<h1><u>STOCK INVENTORY MANAGEMENT</u></h1>
-		</center>
+		
+			<h1>STOCK INVENTORY MANAGEMENT</h1>
 	</div>
 	<br>
 	<ul>
@@ -99,9 +91,10 @@ table, th, td {
         <li><a  href = "userpurchaselist">My Order List</a></li>
            <li> <a href = "userinvoice">  Invoice </a></li>
              <li><a href="#help">Help</a></li>
-        <br><br>
+        
       </ul>
-          <table style="width:80%;margin-left:100px;">
+          <table>
+          <caption></caption>
           <tr>
             
              <th scope="col">Order Id</th>

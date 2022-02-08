@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.stock.exception.EmailException;
 import com.stock.impl.UserImpl;
+import com.stock.logger.Logger;
 import com.stock.model.User;
 
 /**
@@ -19,7 +20,7 @@ import com.stock.model.User;
 @WebServlet("/reg")
 public class RegisterServlet extends HttpServlet {
 
-
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,11 +28,10 @@ public class RegisterServlet extends HttpServlet {
 		
 		String userName=request.getParameter("userName");
 		String address=request.getParameter("address");
-		String mail=request.getParameter("email");
+	    String mail=request.getParameter("email");
+	    try {
 		long mobNum=Long.parseLong(request.getParameter("mobileNumber"));
 		String pass=request.getParameter("password");
-		
-		
 		User us=new User(userName,mail,address,pass,mobNum);
 		
 		UserImpl userDao=new UserImpl();
@@ -53,11 +53,11 @@ public class RegisterServlet extends HttpServlet {
 				
 			}
 		}
-		
-		
-		
-		
 	
+	}catch(IOException | NumberFormatException er) {
+		Logger.printStackTrace(er);
+		Logger.runTimeException(er.getMessage());
 	}
 
+}
 }

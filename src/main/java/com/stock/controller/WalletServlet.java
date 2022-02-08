@@ -14,24 +14,18 @@ import com.stock.impl.UserImpl;
 
 import com.stock.model.User;
 
-/**
- * Servlet implementation class WalletServlet
- */
+
 @WebServlet("/wallet")
 public class WalletServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+   
     public WalletServlet() {
         super();
 
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

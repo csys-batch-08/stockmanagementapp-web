@@ -15,7 +15,7 @@ import com.stock.impl.PuruchaseImpl;
 import com.stock.model.Purchase;
 @WebServlet("/Allpurchaselist")
 public class AllPurchaseListServlet extends HttpServlet {
-
+	private static final long serialVersionUID = 1L;
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		

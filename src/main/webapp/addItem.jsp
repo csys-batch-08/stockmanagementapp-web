@@ -113,7 +113,7 @@ body {
 
     
     <div class="h1">
-        <center><h1 >STOCK INVENTORY MANAGEMENT</h1></center>
+        <h1 >STOCK INVENTORY MANAGEMENT</h1>
     </div>
    <div class="topnav" id="myTopnav">
    <a href="stockItemsadmin" >Stock</a>
@@ -124,7 +124,7 @@ body {
     <a href="Admincart">Cart</a>
       <div class="dropdown">
       <button class="dropbtn" >StockItem Add
-        <i class="fa fa-caret-down"></i>
+        <em class="fa fa-caret-down"></em>
       </button>
       <div class="dropdown-content">
         <a href="AddItems.jsp">Add New Product</a>
@@ -150,7 +150,8 @@ body {
 				type="number" name="amount" id="number" list="amount" required
 				placeholder="enter amount" min="0"><br> <br>
 			<button type="submit">Add Item</button>
+				</form>
 	</div>
-	</form>
+
 </body>
 </html>

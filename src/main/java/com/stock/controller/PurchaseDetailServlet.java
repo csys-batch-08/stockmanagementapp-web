@@ -11,17 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.stock.logger.Logger;
+
 
 @WebServlet("/purchase1")
 public class PurchaseDetailServlet extends HttpServlet {
-
+	private static final long serialVersionUID = 1L;
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		
-		
-		
 		HttpSession session = req.getSession();
+	try {	
+		
 		int userid = Integer.parseInt(session.getAttribute("userid").toString());
         
 		int productId = Integer.parseInt(session.getAttribute("proid").toString());
@@ -32,7 +32,7 @@ public class PurchaseDetailServlet extends HttpServlet {
 		
 		double price = Double.parseDouble(session.getAttribute("price").toString());
 		
-       
+	
         
         req.setAttribute("productId", productId);
         req.setAttribute("userid", userid);
@@ -44,6 +44,10 @@ public class PurchaseDetailServlet extends HttpServlet {
 
 		rd.forward(req, resp);
 
+	}catch(IOException er) {
+		Logger.printStackTrace(er);
+		Logger.runTimeException(er.getMessage());
 	}
 
+}
 }

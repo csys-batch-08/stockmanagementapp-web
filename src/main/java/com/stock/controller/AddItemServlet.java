@@ -14,6 +14,7 @@ import com.stock.model.Stock;
 
 @WebServlet("/additemservlet")
 public class AddItemServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 		try {

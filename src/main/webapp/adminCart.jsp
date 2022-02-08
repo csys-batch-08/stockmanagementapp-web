@@ -104,16 +104,14 @@ body {
     background-color:#7c9ce5;
      margin-top:100px;
     }
-    table{
-    margin-top:100px;
-    margin-left:100px;}
+    table{ border=1 style="width:80%;margin-left:100px;}
 </style>
 </head>
 <body>
 
     
     <div class="h1">
-        <center><h1 >STOCK INVENTORY MANAGEMENT</h1></center>
+        <h1 >STOCK INVENTORY MANAGEMENT</h1>
     </div>
    <div class="topnav" id="myTopnav">
    <a href="stockItemsadmin" >Stock</a>
@@ -124,7 +122,7 @@ body {
     <a href="Admincart">Cart</a>
       <div class="dropdown">
       <button class="dropbtn" >StockItem Add
-        <i class="fa fa-caret-down"></i>
+        <em class="fa fa-caret-down"></em>
       </button>
       <div class="dropdown-content">
         <a href="addItems.jsp">Add New Product</a>
@@ -136,8 +134,9 @@ body {
   
     </div>
   
-<div class="container">    
-     <table border=1 style="width:80%;margin-left:100px;">
+  
+     <table>
+     <caption></caption>
           <tr>
             
             <th scope="col">Cart Id</th>
@@ -158,7 +157,7 @@ body {
           <tr>
             
             <td>${adminview.cartId} </td>
-            <a><td>${adminview.userId}</td>
+            <td>${adminview.userId}</td>
             <td>${adminview.productId}</td>
             <td>${adminview.qunatity}</td>
             <td>${adminview.totalPrice}</td>
@@ -166,7 +165,7 @@ body {
             <td><fmt:formatDate pattern="dd-MM-yyyy" value="${parsedExpectedDate}" /></td>
       
           </tr>
-           
+         
      </c:forEach>
       </table>
 </body>

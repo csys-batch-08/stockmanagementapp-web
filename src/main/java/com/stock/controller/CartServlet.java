@@ -22,12 +22,13 @@ import com.stock.model.Cart;
 
 @WebServlet("/cart")
 public class CartServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	@Override
-	public void doPost(HttpServletRequest req, HttpServletResponse resp)  {
-		PrintWriter out=null;
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException  {
+	
 	 
 		try {	
-			out=resp.getWriter();
+			
 	    HttpSession session=req.getSession();
 		
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
@@ -75,7 +76,7 @@ public class CartServlet extends HttpServlet {
 					
 				}
 		}catch(InsufficientQuantityException e) {
-
+			PrintWriter out=resp.getWriter();
 			
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('Insufficient Quantity');");

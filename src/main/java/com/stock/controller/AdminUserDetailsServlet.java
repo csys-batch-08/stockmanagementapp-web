@@ -15,7 +15,7 @@ import com.stock.impl.UserImpl;
 import com.stock.model.User;
 @WebServlet("/adminuserview")
 public class AdminUserDetailsServlet extends HttpServlet {
-
+	private static final long serialVersionUID = 1L;
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		

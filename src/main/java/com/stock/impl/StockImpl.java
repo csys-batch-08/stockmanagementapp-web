@@ -15,6 +15,7 @@ import com.stock.util.ConnectionUtil;
 
 public class StockImpl implements StockDao {
 
+	private static final String PRICE = "price";
 	private static final String PRODUCT_QTY = "product_qty";
 	private static final String PRODUCT_ID = "product_id";
 	private static final String PRODUCT_NAME = "product_name";
@@ -32,7 +33,7 @@ public class StockImpl implements StockDao {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 
-				Stock stock = new Stock(rs.getInt(PRODUCT_ID), rs.getString(PRODUCT_NAME), rs.getInt(PRODUCT_QTY),rs.getDouble("price"));
+				Stock stock = new Stock(rs.getInt(PRODUCT_ID), rs.getString(PRODUCT_NAME), rs.getInt(PRODUCT_QTY),rs.getDouble(PRICE));
 				productsList.add(stock);
 
 			}
@@ -66,7 +67,7 @@ public class StockImpl implements StockDao {
 			while (rs.next()) {
 
 				Stock stock = new Stock(rs.getInt(PRODUCT_ID), rs.getString(PRODUCT_NAME), rs.getInt(PRODUCT_QTY),
-						rs.getDouble("price"));
+						rs.getDouble(PRICE));
 				searchproducts.add(stock);
 
 			}
@@ -239,7 +240,7 @@ public class StockImpl implements StockDao {
 			while (rs.next()) {
 
 				Stock stock = new Stock(rs.getInt(PRODUCT_ID), rs.getString(PRODUCT_NAME), rs.getInt(PRODUCT_QTY),
-						rs.getDouble("price"));
+						rs.getDouble(PRICE));
 				products.add(stock);
 
 			}
@@ -270,7 +271,7 @@ public class StockImpl implements StockDao {
 			pstmt.setInt(1, productId);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-	      stock = new Stock(rs.getInt(PRODUCT_ID), rs.getString(PRODUCT_NAME), rs.getInt(PRODUCT_QTY),rs.getDouble("price"));
+	      stock = new Stock(rs.getInt(PRODUCT_ID), rs.getString(PRODUCT_NAME), rs.getInt(PRODUCT_QTY),rs.getDouble(PRICE));
 
 				
 

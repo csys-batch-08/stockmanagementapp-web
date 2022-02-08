@@ -12,28 +12,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.stock.impl.StockImpl;
 import com.stock.model.Stock;
+
 @WebServlet("/searchitem")
 public class SearchServlet extends HttpServlet {
-
+	private static final long serialVersionUID = 1L;
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-	     
-			String productName=req.getParameter("proname");
-		StockImpl stock =new StockImpl();
-		List<Stock> searchList=stock.serachProduct(productName);
+
+		String productName = req.getParameter("proname");
+		StockImpl stock = new StockImpl();
+		List<Stock> searchList = stock.serachProduct(productName);
 		req.setAttribute("products", searchList);
-		
-		RequestDispatcher rd= req.getRequestDispatcher("stockItemsUsers.jsp");
-		
+
+		RequestDispatcher rd = req.getRequestDispatcher("stockItemsUsers.jsp");
+
 		rd.forward(req, resp);
-		
+
 	}
 
-	
-	
-	
-	
-	
-	
 }

@@ -14,7 +14,7 @@ import com.stock.impl.StockImpl;
 import com.stock.model.Stock;
 @WebServlet("/stockItemsUser")
 public class StockViewUser extends HttpServlet {
-
+	private static final long serialVersionUID = 1L;
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		

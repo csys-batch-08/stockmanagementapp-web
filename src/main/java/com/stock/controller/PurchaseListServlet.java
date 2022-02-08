@@ -16,6 +16,7 @@ import com.stock.exception.InsufficientBalances;
 
 import com.stock.impl.CartImpl;
 import com.stock.impl.PuruchaseImpl;
+import com.stock.logger.Logger;
 import com.stock.model.Cart;
 import com.stock.model.Purchase;
 
@@ -34,25 +35,30 @@ public class PurchaseListServlet extends HttpServlet {
 
 	}
 
-
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		Purchase purchase = null;
+		int userid = 0;
+		int productid = 0;
 		HttpSession session = request.getSession();
-		PrintWriter out = response.getWriter();
-		int productid = Integer.parseInt(session.getAttribute("proid").toString());
 
-		int userid = Integer.parseInt(session.getAttribute("userid").toString());
+		try {
+			productid = Integer.parseInt(session.getAttribute("proid").toString());
 
-		String prodname = (session.getAttribute("productname").toString());
+			userid = Integer.parseInt(session.getAttribute("userid").toString());
 
-		int quantity = Integer.parseInt(session.getAttribute("proqty").toString());
+			String prodname = (session.getAttribute("productname").toString());
 
-		double totalprice = Double.parseDouble(session.getAttribute("price").toString());
+			int quantity = Integer.parseInt(session.getAttribute("proqty").toString());
 
-		Purchase purchase = new Purchase(productid, userid, prodname, quantity, totalprice);
+			double totalprice = Double.parseDouble(session.getAttribute("price").toString());
 
+			purchase = new Purchase(productid, userid, prodname, quantity, totalprice);
+		} catch (NumberFormatException e) {
+			Logger.printStackTrace(e);
+			Logger.runTimeException(e.getMessage());
+		}
 		PuruchaseImpl pimpl = new PuruchaseImpl();
 		int i = pimpl.insert(purchase);
 		try {
@@ -73,14 +79,23 @@ public class PurchaseListServlet extends HttpServlet {
 
 			}
 
-			response.sendRedirect("userpurchaselist.jsp");
+			response.sendRedirect("userPurchaseList.jsp");
 
 		} catch (InsufficientBalances e) {
-			out.println("<script type=\"text/javascript\">");
-			out.println("alert('InsufficientBalances');");
-			out.println("location='walletRecharge.jsp';");
-			out.println("</script>");
 
+			try {
+				PrintWriter out = response.getWriter();
+				out.println("<script type=\"text/javascript\">");
+				out.println("alert('InsufficientBalances');");
+				out.println("location='walletRecharge.jsp';");
+				out.println("</script>");
+			} catch (IOException er) {
+				Logger.printStackTrace(er);
+				Logger.runTimeException(er.getMessage());
+			}
+		} catch (IOException e) {
+			Logger.printStackTrace(e);
+			Logger.runTimeException(e.getMessage());
 		}
 
 	}

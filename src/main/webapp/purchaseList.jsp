@@ -110,16 +110,15 @@ body {
 }
 
 table {
-	margin-top: 100px;
-	margin-left: 100px;
+	border=1px; style="width: 90%; margin-left: 100px; border-collapse: collapse
 }
 </style>
 </head>
 <body>
 
 
-	<div class="h1">	
-	<h1>STOCK INVENTORY MANAGEMENT</h1>
+	<div class="h1">
+		<h1>STOCK INVENTORY MANAGEMENT</h1>
 	</div>
 	<div class="topnav" id="myTopnav">
 		<a href="stockItemsadmin">Stock</a> <a href="adminuserview">UserDetails</a>
@@ -127,7 +126,7 @@ table {
 			style="float: right">Logout</a> <a href="Admincart">Cart</a>
 		<div class="dropdown">
 			<button class="dropbtn">
-				StockItem Add <i class="fa fa-caret-down"></i>
+				StockItem Add <em class="fa fa-caret-down"></em>
 			</button>
 			<div class="dropdown-content">
 				<a href="addItems.jsp">Add New Product</a>
@@ -139,8 +138,8 @@ table {
 
 	</div>
 
-	<table id="myTable" border=1px;
-		style="width: 90%; margin-left: 100px; border-collapse: collapse">
+	<table id="myTable" >
+	<caption></caption>
 		<thead>
 			<tr>
 
