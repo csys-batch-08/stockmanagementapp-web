@@ -51,30 +51,26 @@ public class CartServlet extends HttpServlet {
 		
 		CartImpl ci=new CartImpl();
 		
-			if(currentqty>quantity) {
+			if(currentqty <= quantity) {
 				
-				ci.insert(cart);
+				throw new InsufficientQuantityException();
+				
+				
+			}
+			ci.insert(cart);
 
-				StockImpl impl = new StockImpl();
-				impl.updateQuantity(productid, quantity);
-				CartImpl cartImpl = new CartImpl();
+			StockImpl impl = new StockImpl();
+			impl.updateQuantity(productid, quantity);
+			CartImpl cartImpl = new CartImpl();
 
-				List<Cart> userview = cartImpl.allcart(userid);
+			List<Cart> userview = cartImpl.allcart(userid);
+
+			session.setAttribute("usercartview", userview);
 			
-				session.setAttribute("usercartview", userview);
-				
+
+			RequestDispatcher rd = req.getRequestDispatcher("userCart.jsp");
 			
-				RequestDispatcher rd = req.getRequestDispatcher("userCart.jsp");
-				
-				rd.forward(req, resp);
-				
-				}
-				else {
-					
-					throw new InsufficientQuantityException();
-					
-					
-				}
+			rd.forward(req, resp);
 		}catch(InsufficientQuantityException e) {
 			PrintWriter out=resp.getWriter();
 			
@@ -87,10 +83,10 @@ public class CartServlet extends HttpServlet {
 			
 			
 		} catch (ParseException  e1) {
-			e1.printStackTrace();
+			e1.getMessage();
 		} catch (IOException | ServletException e) {
 			
-			e.printStackTrace();
+			e.getMessage();
 		} 		
 	}
 }

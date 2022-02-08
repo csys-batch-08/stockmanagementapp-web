@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.stock.impl.UserImpl;
-
 import com.stock.model.User;
 
 
@@ -51,7 +50,7 @@ public class WalletServlet extends HttpServlet {
 		rd.forward(request, response);
 	}
 	catch (IOException | NumberFormatException e ) {
-		e.printStackTrace();
+		e.getMessage();
 	}	
 		
 		

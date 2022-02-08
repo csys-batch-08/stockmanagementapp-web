@@ -109,41 +109,39 @@ body {
 	text-align: center;
 }
 
-table {
-	border=1px; style="width: 90%; margin-left: 100px; border-collapse: collapse
+table {border =1px;
+	style ="width: 90%;
+	margin-left: 100px;
+	border-collapse: collapse
 }
 </style>
 </head>
 <body>
 
-
 	<div class="h1">
 		<h1>STOCK INVENTORY MANAGEMENT</h1>
 	</div>
 	<div class="topnav" id="myTopnav">
-		<a href="stockItemsadmin">Stock</a> <a href="adminuserview">UserDetails</a>
-		<a href="invoiceview">Invoice</a> <a href="index.jsp"
-			style="float: right">Logout</a> <a href="Admincart">Cart</a>
+		<a href="stockItemsadmin">Stock</a>
+		<a href="adminuserview">UserDetails</a>
+		<a href="invoiceview">Invoice</a> 
+		<a href="index.jsp" style="float: right">Logout</a>
+		<a href="Admincart">Cart</a>	 
 		<div class="dropdown">
-			<button class="dropbtn">
-				StockItem Add <em class="fa fa-caret-down"></em>
-			</button>
-			<div class="dropdown-content">
-				<a href="addItems.jsp">Add New Product</a>
-
-			</div>
+		<button class="dropbtn">StockItem Add <em class="fa fa-caret-down"></em></button>
+		<div class="dropdown-content">
+		<a href="addItems.jsp">Add New Product</a>		
+        </div>
 		</div>
-		<a href="admin" style="float: right">Order Delivery Date</a> <a
-			href="Allpurchaselist">PurchaseList</a>
+		<a href="admin" style="float: right">Order Delivery Date</a>
+		<a href="Allpurchaselist">PurchaseList</a>
+     </div>
 
-	</div>
-
-	<table id="myTable" >
-	<caption></caption>
+	<table id="myTable">
+		<caption></caption>
 		<thead>
 			<tr>
-
-				<th scope="col">Order Id</th>
+                <th scope="col">Order Id</th>
 				<th scope="col">Product Id</th>
 				<th scope="col">User Id</th>
 				<th scope="col">Product Name</th>
@@ -151,19 +149,13 @@ table {
 				<th scope="col">Total Price</th>
 				<th scope="col">Status</th>
 				<th scope="col">Date</th>
-
-
-			</tr>
-
-		</thead>
+            </tr>
+        </thead>
 		<tbody>
 			<c:forEach items="${purchase}" var="purchaselist">
 				<fmt:parseDate pattern="yyyy-MM-dd"
 					value="${purchaselist.orderDate}" var="parsedOrderdDate" />
-
-
 				<tr>
-
 					<td>${purchaselist.cartId}</td>
 					<td>${purchaselist.productId}</td>
 					<td>${purchaselist.userId}</td>
@@ -171,15 +163,11 @@ table {
 					<td>${purchaselist.orderQty}</td>
 					<td>${purchaselist.totalPrice}</td>
 					<td>${purchaselist.status}</td>
-
-					<td><fmt:formatDate pattern="dd-MM-yyyy"
-							value="${parsedOrderdDate}" /></td>
-
-				</tr>
-
-			</c:forEach>
-		</tbody>
-	</table>
+                    <td><fmt:formatDate pattern="dd-MM-yyyy" value="${parsedOrderdDate}" /></td>
+				</tr>	
+         </c:forEach>
+		 </tbody>
+	     </table>
 
 	<script>
 		$(document).ready(function() {
@@ -187,8 +175,5 @@ table {
 		});
 	</script>
 
-
 </body>
-
-
 </html>

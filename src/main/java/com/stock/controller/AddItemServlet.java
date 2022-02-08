@@ -3,7 +3,6 @@ package com.stock.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -45,7 +44,7 @@ public class AddItemServlet extends HttpServlet {
 			}
 
 		} catch (IOException | NumberFormatException e ) {
-			e.printStackTrace();
+			e.getMessage();
 		}
 	}
 }

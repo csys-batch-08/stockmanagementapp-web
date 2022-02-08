@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.stock.impl.InvoiceImpl;
-
 import com.stock.model.Invoice;
 
 /**
@@ -45,7 +44,7 @@ public class InvoiceServlet extends HttpServlet {
 
 			response.sendRedirect("invoice.jsp");
 		} catch (IOException | NumberFormatException | ParseException e) {
-			e.printStackTrace();
+			e.getMessage();
 
 		}
 	}

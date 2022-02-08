@@ -41,7 +41,7 @@ public class UpdateStockServlet extends HttpServlet {
 		session.setAttribute("products", productsList);
 		response.sendRedirect("stockItemsAdmin.jsp");
 		}catch (IOException | NumberFormatException e ) {
-			e.printStackTrace();
+			e.getMessage();
 		}	
 		
 	}

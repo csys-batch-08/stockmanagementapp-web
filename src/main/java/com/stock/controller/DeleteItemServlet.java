@@ -1,6 +1,7 @@
 package com.stock.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +28,7 @@ public class DeleteItemServlet extends HttpServlet {
 		response.sendRedirect("stockItemsAdmin.jsp");
 	}
 	catch (IOException | NumberFormatException e ) {
-		e.printStackTrace();
+		e.getMessage();
 	}	
 		
 	
