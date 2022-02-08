@@ -2,7 +2,7 @@ package com.stock.controller;
 
 import java.io.IOException;
 
-
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,11 +43,12 @@ public class WalletServlet extends HttpServlet {
 		User wallet= new User(amount,password);
 		
 		userwallet.wallet(wallet);
-		User walletamount=userwallet.walletAmount(userid);
-		Double amount1=walletamount.getWallet();
+		double walletamount=userwallet.walletAmount(userid);
 		
-		session.setAttribute("walletamount", amount1);
-		response.sendRedirect("walletRecharge.jsp");
+		
+		request.setAttribute("walletamount", walletamount);
+		RequestDispatcher rd=request.getRequestDispatcher( ("walletRecharge.jsp"));
+		rd.forward(request, response);
 	}
 	catch (IOException | NumberFormatException e ) {
 		e.printStackTrace();

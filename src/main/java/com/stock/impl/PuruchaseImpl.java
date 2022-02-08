@@ -1,5 +1,6 @@
 package com.stock.impl;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,86 +16,72 @@ import com.stock.util.ConnectionUtil;
 
 public class PuruchaseImpl implements PurchaseDao {
 	public int insert(Purchase purchase) {
-		String updateQuery1 = "select wallet from users where user_id= ? ";
+		String walletAmount = "select wallet from users where user_id= ? ";
 
-		String updateQuery = "update users set wallet= wallet - ? where user_id=?";
+		String walletReduce = "update users set wallet= wallet - ? where user_id=?";
 
 		String insertQuery = "insert into purchases_list (product_id,user_id,product_name,quantity,total_price )values (?,?,?,?,?)";
 		int num = 0;
 		Connection con = null;
-		PreparedStatement pstmt3 = null;
-		ResultSet rs2 = null;
-		PreparedStatement pstmt1 = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		PreparedStatement prestmt = null;
 		PreparedStatement pstmt = null;
+		double wallet = 0;
 		try {
 			con = ConnectionUtil.gbConnection();
-			pstmt3 = con.prepareStatement(updateQuery1);
-			pstmt3.setInt(1, purchase.getUserId());
-			rs2 = pstmt3.executeQuery();
-			double wallet = 0;
-			if (rs2.next()) {
-				wallet = rs2.getDouble(1);
+			preparedStatement = con.prepareStatement(walletAmount);
+			preparedStatement.setInt(1, purchase.getUserId());
+			resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				wallet = resultSet.getDouble(1);
 			}
-			if (wallet > purchase.getTotalPrice()) {
-				pstmt1 = con.prepareStatement(updateQuery);
-				pstmt1.setDouble(1, purchase.getTotalPrice());
-				pstmt1.setInt(2, purchase.getUserId());
-
-			    pstmt1.executeUpdate();
-				
-
-				pstmt = con.prepareStatement(insertQuery);
-				pstmt.setInt(1, purchase.getProductId());
-				pstmt.setInt(2, purchase.getUserId());
-				pstmt.setString(3, purchase.getProductName());
-				pstmt.setInt(4, purchase.getOrderQty());
-				pstmt.setDouble(5, purchase.getTotalPrice());
-
-			    pstmt.executeUpdate();
-				
-			} else {
-
-				num = 5;
-			}
-
-		} catch (ClassNotFoundException | SQLException e) {
-
-			e.printStackTrace();
+		} catch (SQLException | ClassNotFoundException e) {
+			Logger.printStackTrace(e);
+		} finally {
+			ConnectionUtil.close(resultSet, preparedStatement, null);
 		}
-
-		finally {
-
+		
+		if (wallet > purchase.getTotalPrice()) {
 			try {
-				if (rs2 != null) {
+			prestmt = con.prepareStatement(walletReduce);
+			prestmt.setDouble(1, purchase.getTotalPrice());
+			prestmt.setInt(2, purchase.getUserId());
 
-					rs2.close();
-				}
+			prestmt.executeUpdate();
+		}catch (SQLException |NullPointerException e) {
+			Logger.printStackTrace(e);
+		} finally {
+			ConnectionUtil.close(null, prestmt, null);
+		}
+			try {
+			pstmt = con.prepareStatement(insertQuery);
+			pstmt.setInt(1, purchase.getProductId());
+			pstmt.setInt(2, purchase.getUserId());
+			pstmt.setString(3, purchase.getProductName());
+			pstmt.setInt(4, purchase.getOrderQty());
+			pstmt.setDouble(5, purchase.getTotalPrice());
 
-				if (pstmt3 != null) {
-					pstmt3.close();
-				}
-				if (pstmt != null) {
-
-					pstmt.close();
-				}
-				if (pstmt1 != null) {
-
-					pstmt1.close();
-				}
-				if (con != null) {
-					con.close();
-				}
+			pstmt.executeUpdate();
+			}catch (SQLException |NullPointerException e) {
+				Logger.printStackTrace(e);
+			} finally {
+				ConnectionUtil.close(null, pstmt, con);
 			}
 
-			catch (SQLException | NumberFormatException e) {
+		} else {
 
-				e.printStackTrace();
-			}
+			num = 5;
 		}
 
 		return num;
 
-	}
+}
+
+	
+
+	
 
 	public List<Purchase> viewpurchase() {
 		List<Purchase> adminpurchaseview = new ArrayList<>();
@@ -102,11 +89,10 @@ public class PuruchaseImpl implements PurchaseDao {
 		PreparedStatement pstmt = null;
 		Connection con = null;
 		ResultSet rs = null;
-		
 
-			try {
-				con = ConnectionUtil.gbConnection();
-			
+		try {
+			con = ConnectionUtil.gbConnection();
+
 			pstmt = con.prepareStatement(showquery);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -138,11 +124,10 @@ public class PuruchaseImpl implements PurchaseDao {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-	
 
-			try {
-				con = ConnectionUtil.gbConnection();
-			 			pstmt = con.prepareStatement(userpurchaseshow);
+		try {
+			con = ConnectionUtil.gbConnection();
+			pstmt = con.prepareStatement(userpurchaseshow);
 			pstmt.setInt(1, userid);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {

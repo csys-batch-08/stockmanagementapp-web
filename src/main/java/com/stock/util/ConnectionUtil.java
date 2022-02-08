@@ -35,7 +35,7 @@ public class ConnectionUtil {
 				con.close();
 			}
 
-		} catch (SQLException e) {
+		} catch (SQLException |NullPointerException e) {
 
 		Logger.printStackTrace(e);
 		Logger.runTimeException(e.getMessage());

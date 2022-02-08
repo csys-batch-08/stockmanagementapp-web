@@ -139,10 +139,10 @@ public class UserImpl implements UserDao {
 
 	}
 
-	public User walletAmount(int userid) {
+	public double walletAmount(int userid) {
 
 		String updatewallet = "select wallet from users where user_id=?";
-		User user = null;
+		double wallet =0;
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
 		Connection con = null;
@@ -153,7 +153,7 @@ public class UserImpl implements UserDao {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 
-				user = new User(rs.getDouble(WALLET));
+				wallet = rs.getDouble(WALLET);
 			}
 
 		} catch (Exception e) {
@@ -166,7 +166,7 @@ public class UserImpl implements UserDao {
 			ConnectionUtil.close(rs, pstmt, con);
 		}
 
-		return user;
+		return wallet;
 	}
 
 	public List<User> showuser() {
