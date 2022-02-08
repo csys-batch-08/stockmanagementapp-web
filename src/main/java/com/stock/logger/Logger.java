@@ -7,7 +7,7 @@ public class Logger {
 	}
 
 	public static void printStackTrace(Exception e) {
-		e.printStackTrace();
+		e.getMessage();
 	}
 
 	public static void runTimeException(String message) {

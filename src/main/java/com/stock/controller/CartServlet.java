@@ -24,9 +24,7 @@ import com.stock.model.Cart;
 public class CartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Override
-	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException  {
-	
-	 
+	public void doPost(HttpServletRequest req, HttpServletResponse resp)  {
 		try {	
 			
 	    HttpSession session=req.getSession();
@@ -44,10 +42,7 @@ public class CartServlet extends HttpServlet {
 		int quantity=Integer.parseInt(req.getParameter("quantity"));
 		
 		double price=Double.parseDouble(session.getAttribute("unitprice").toString());
-		
-
-
-		Cart cart=new Cart(userid,productid,quantity,price,dt);
+       Cart cart=new Cart(userid,productid,quantity,price,dt);
 		
 		CartImpl ci=new CartImpl();
 		
@@ -72,7 +67,13 @@ public class CartServlet extends HttpServlet {
 			
 			rd.forward(req, resp);
 		}catch(InsufficientQuantityException e) {
-			PrintWriter out=resp.getWriter();
+			PrintWriter out=null;
+			try {
+				out = resp.getWriter();
+			} catch (IOException e1) {
+			
+				e1.printStackTrace();
+			}
 			
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('Insufficient Quantity');");
@@ -82,9 +83,9 @@ public class CartServlet extends HttpServlet {
 			
 			
 			
-		} catch (ParseException  e1) {
+		} catch (ParseException | IOException e1) {
 			e1.getMessage();
-		} catch (IOException | ServletException e) {
+		} catch ( ServletException e) {
 			
 			e.getMessage();
 		} 		

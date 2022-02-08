@@ -14,7 +14,8 @@
 <link rel="style"
 	href="//cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
 <script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"
+	></script>
 <script type="text/javascript"
 	src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 
